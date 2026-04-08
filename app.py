@@ -39,8 +39,8 @@ def deploy():
 
     subprocess.Popen(
         ["/bin/bash", "/var/www/automatly/deploy.sh"],
-        stdout=subprocess.DEVNULL,
-        stderr=subprocess.DEVNULL,
+        stdout=open("/var/www/automatly/webhook.log", "ab"),
+        stderr=open("/var/www/automatly/webhook.log", "ab"),
         start_new_session=True
     )
 
