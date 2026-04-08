@@ -1,5 +1,5 @@
 from flask import Flask
-from site import site_bp
+from site_routes import site_bp
 from webhook import webhook_bp
 
 app = Flask(__name__)
