@@ -6,7 +6,7 @@ import subprocess
 
 app = Flask(__name__)
 
-WEBHOOK_SECRET = "CHANGE_THIS_TO_A_LONG_RANDOM_SECRET"
+WEBHOOK_SECRET = "MDQ6VXNlcjc0MTM4NTAy"
 
 
 @app.route("/")
