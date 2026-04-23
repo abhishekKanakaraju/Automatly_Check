@@ -12,3 +12,5 @@ echo Pushing to GitHub...
 git push
 
 echo Done.
+
+pause
