@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Employers | i.Exchange.ai</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0A1628;
+    --navy-mid: #0F2040;
+    --navy-light: #1A3560;
+    --blue: #1E5FCC;
+    --blue-bright: #2B7FFF;
+    --cyan: #00C6FF;
+    --cyan-soft: #67E4FF;
+    --white: #FFFFFF;
+    --offwhite: #F0F6FF;
+    --muted: #8BA8CC;
+    --text: #C8DDF5;
+    --accent-gold: #FFD166;
+    --accent-green: #06D6A0;
+    --card-bg: rgba(255,255,255,0.04);
+    --card-border: rgba(100,180,255,0.12);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--navy);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 60px;
+    background: rgba(10,22,40,0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(100,180,255,0.08);
+  }
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-size: 22px; font-weight: 800;
+    color: var(--white);
+    letter-spacing: -0.5px;
+  }
+  .nav-logo span { color: var(--cyan); }
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a {
+    color: var(--muted); text-decoration: none;
+    font-size: 14px; font-weight: 500;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover, .nav-links a.active { color: var(--white); }
+  .nav-cta {
+    background: var(--blue-bright);
+    color: var(--white); border: none;
+    padding: 10px 24px; border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px; font-weight: 500;
+    cursor: pointer; transition: background 0.2s, transform 0.15s;
+  }
+  .nav-cta:hover { background: var(--cyan); color: var(--navy); transform: translateY(-1px); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 120px 60px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 70% 60% at 70% 40%, rgba(30,95,204,0.25) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 20% 80%, rgba(0,198,255,0.1) 0%, transparent 60%),
+      linear-gradient(180deg, #0A1628 0%, #0D1E38 100%);
+  }
+  .hero-grid {
+    position: absolute; inset: 0; opacity: 0.04;
+    background-image:
+      linear-gradient(rgba(100,180,255,1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(100,180,255,1) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  .hero-content { position: relative; z-index: 2; max-width: 680px; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(0,198,255,0.1);
+    border: 1px solid rgba(0,198,255,0.25);
+    padding: 6px 16px; border-radius: 100px;
+    font-size: 12px; font-weight: 500;
+    color: var(--cyan); letter-spacing: 1px;
+    text-transform: uppercase; margin-bottom: 28px;
+  }
+  .hero-badge::before {
+    content: '';
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--cyan);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(1.4); }
+  }
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(40px, 5.5vw, 68px);
+    font-weight: 800;
+    line-height: 1.1;
+    color: var(--white);
+    letter-spacing: -2px;
+    margin-bottom: 24px;
+  }
+  h1 .highlight {
+    background: linear-gradient(135deg, var(--cyan) 0%, var(--blue-bright) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero-sub {
+    font-size: 18px; font-weight: 300;
+    color: var(--text); line-height: 1.7;
+    margin-bottom: 40px; max-width: 520px;
+  }
+  .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--blue-bright), var(--cyan));
+    color: var(--navy); border: none;
+    padding: 14px 32px; border-radius: 10px;
+    font-family: 'Syne', sans-serif;
+    font-size: 15px; font-weight: 700;
+    cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 24px rgba(43,127,255,0.35);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(43,127,255,0.5); }
+  .btn-secondary {
+    background: transparent;
+    color: var(--white);
+    border: 1px solid rgba(100,180,255,0.3);
+    padding: 14px 32px; border-radius: 10px;
+    font-family: 'Syne', sans-serif;
+    font-size: 15px; font-weight: 600;
+    cursor: pointer; transition: border-color 0.2s, background 0.2s;
+  }
+  .btn-secondary:hover { border-color: var(--cyan); background: rgba(0,198,255,0.06); }
+
+  .hero-stats {
+    display: flex; gap: 48px;
+    margin-top: 60px; padding-top: 40px;
+    border-top: 1px solid rgba(100,180,255,0.1);
+  }
+  .stat-item {}
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 36px; font-weight: 800;
+    color: var(--white); letter-spacing: -1px;
+    line-height: 1;
+  }
+  .stat-num span { color: var(--cyan); }
+  .stat-label {
+    font-size: 13px; color: var(--muted);
+    margin-top: 4px; font-weight: 400;
+  }
+
+  /* SECTION SHARED */
+  section { padding: 100px 60px; }
+  .section-label {
+    display: inline-block;
+    font-size: 11px; letter-spacing: 2px;
+    text-transform: uppercase; font-weight: 600;
+    color: var(--cyan); margin-bottom: 16px;
+  }
+  h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(28px, 3.5vw, 44px);
+    font-weight: 800; color: var(--white);
+    letter-spacing: -1.5px; line-height: 1.15;
+    margin-bottom: 16px;
+  }
+  .section-sub {
+    font-size: 17px; color: var(--muted);
+    max-width: 520px; line-height: 1.7;
+    font-weight: 300;
+  }
+
+  /* PROBLEM STRIP */
+  .problem-strip {
+    background: var(--navy-mid);
+    border-top: 1px solid var(--card-border);
+    border-bottom: 1px solid var(--card-border);
+    padding: 60px;
+  }
+  .problem-strip h2 { margin-bottom: 48px; }
+  .problem-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+  .problem-card {
+    background: rgba(255,255,255,0.02);
+    padding: 36px 32px;
+    position: relative; overflow: hidden;
+  }
+  .problem-card::before {
+    content: attr(data-num);
+    position: absolute; top: 20px; right: 24px;
+    font-family: 'Syne', sans-serif;
+    font-size: 72px; font-weight: 800;
+    color: rgba(100,180,255,0.05);
+    line-height: 1;
+  }
+  .problem-card h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 18px; font-weight: 700;
+    color: var(--white); margin-bottom: 12px;
+  }
+  .problem-card p { font-size: 14px; color: var(--muted); line-height: 1.65; }
+  .problem-icon {
+    font-size: 28px; margin-bottom: 20px;
+    display: block;
+  }
+
+  /* HOW IT WORKS */
+  .how-section { position: relative; }
+  .how-section::before {
+    content: '';
+    position: absolute; left: 60px; top: 180px; bottom: 100px;
+    width: 1px;
+    background: linear-gradient(180deg, transparent, var(--blue-bright), transparent);
+    opacity: 0.3;
+  }
+  .steps-list {
+    display: flex; flex-direction: column; gap: 0;
+    margin-top: 64px; max-width: 800px;
+  }
+  .step {
+    display: grid; grid-template-columns: 80px 1fr;
+    gap: 32px; padding: 40px 0;
+    border-bottom: 1px solid rgba(100,180,255,0.07);
+    position: relative;
+  }
+  .step:last-child { border-bottom: none; }
+  .step-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 13px; font-weight: 700;
+    color: var(--cyan); letter-spacing: 1px;
+    padding-top: 4px;
+    position: relative; z-index: 2;
+  }
+  .step-dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--blue-bright);
+    position: absolute; left: -5px; top: 48px;
+    box-shadow: 0 0 12px var(--blue-bright);
+    display: none;
+  }
+  .step-body h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 22px; font-weight: 700;
+    color: var(--white); margin-bottom: 10px;
+  }
+  .step-body p { font-size: 15px; color: var(--muted); line-height: 1.7; }
+  .step-tag {
+    display: inline-block; margin-top: 14px;
+    background: rgba(6,214,160,0.1);
+    border: 1px solid rgba(6,214,160,0.2);
+    color: var(--accent-green);
+    font-size: 12px; font-weight: 500;
+    padding: 4px 12px; border-radius: 100px;
+  }
+
+  /* FEATURES GRID */
+  .features-section {
+    background: var(--navy-mid);
+    border-top: 1px solid var(--card-border);
+  }
+  .features-header {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 80px; align-items: end;
+    margin-bottom: 64px;
+  }
+  .features-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1px; background: var(--card-border);
+    border: 1px solid var(--card-border);
+    border-radius: 16px; overflow: hidden;
+  }
+  .feature-card {
+    background: var(--navy-mid);
+    padding: 36px 30px;
+    transition: background 0.25s;
+    position: relative;
+  }
+  .feature-card:hover { background: rgba(30,95,204,0.12); }
+  .feature-card::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--blue-bright), transparent);
+    opacity: 0; transition: opacity 0.25s;
+  }
+  .feature-card:hover::after { opacity: 1; }
+  .feature-icon {
+    width: 44px; height: 44px;
+    background: rgba(43,127,255,0.12);
+    border: 1px solid rgba(43,127,255,0.2);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; margin-bottom: 20px;
+  }
+  .feature-card h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 16px; font-weight: 700;
+    color: var(--white); margin-bottom: 10px;
+  }
+  .feature-card p { font-size: 13.5px; color: var(--muted); line-height: 1.65; }
+
+  /* TESTIMONIALS */
+  .testimonials-section {}
+  .testimonials-header { margin-bottom: 56px; }
+  .testimonials-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .testi-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 16px; padding: 36px;
+    position: relative;
+    transition: border-color 0.25s, transform 0.25s;
+  }
+  .testi-card:hover { border-color: rgba(100,180,255,0.3); transform: translateY(-4px); }
+  .testi-card::before {
+    content: '"';
+    position: absolute; top: 24px; right: 28px;
+    font-family: 'Syne', sans-serif;
+    font-size: 80px; font-weight: 800;
+    color: rgba(43,127,255,0.12);
+    line-height: 1;
+  }
+  .testi-text {
+    font-size: 15px; line-height: 1.75;
+    color: var(--text); font-style: italic;
+    margin-bottom: 28px; font-weight: 300;
+  }
+  .testi-author { display: flex; align-items: center; gap: 14px; }
+  .testi-avatar {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--blue-bright), var(--cyan));
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-size: 16px; font-weight: 700; color: var(--navy);
+    flex-shrink: 0;
+  }
+  .testi-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 14px; font-weight: 700; color: var(--white);
+  }
+  .testi-role { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+  /* PRICING */
+  .pricing-section {
+    background: var(--navy-mid);
+    border-top: 1px solid var(--card-border);
+  }
+  .pricing-header { text-align: center; margin-bottom: 60px; }
+  .pricing-header .section-sub { margin: 0 auto; }
+  .pricing-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 24px; max-width: 1000px; margin: 0 auto;
+  }
+  .plan-card {
+    border: 1px solid var(--card-border);
+    border-radius: 20px; padding: 40px 32px;
+    position: relative; transition: border-color 0.25s;
+    background: rgba(255,255,255,0.02);
+  }
+  .plan-card.featured {
+    border-color: var(--blue-bright);
+    background: rgba(30,95,204,0.1);
+  }
+  .plan-card.featured::before {
+    content: 'Most Popular';
+    position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
+    background: var(--blue-bright);
+    color: var(--white); font-size: 11px; font-weight: 700;
+    padding: 4px 14px; border-radius: 100px;
+    font-family: 'Syne', sans-serif; letter-spacing: 0.5px;
+    white-space: nowrap;
+  }
+  .plan-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 14px; font-weight: 700;
+    color: var(--cyan); letter-spacing: 1px;
+    text-transform: uppercase; margin-bottom: 16px;
+  }
+  .plan-price {
+    font-family: 'Syne', sans-serif;
+    font-size: 42px; font-weight: 800;
+    color: var(--white); line-height: 1;
+    margin-bottom: 6px;
+  }
+  .plan-price sup { font-size: 20px; vertical-align: super; }
+  .plan-period { font-size: 13px; color: var(--muted); margin-bottom: 32px; }
+  .plan-features { list-style: none; margin-bottom: 36px; }
+  .plan-features li {
+    padding: 10px 0; border-bottom: 1px solid rgba(100,180,255,0.06);
+    font-size: 14px; color: var(--text);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .plan-features li::before {
+    content: '✓'; color: var(--accent-green);
+    font-weight: 700; font-size: 13px; flex-shrink: 0;
+  }
+  .plan-features li.no::before { content: '×'; color: var(--muted); }
+  .plan-features li.no { color: var(--muted); }
+  .plan-btn {
+    width: 100%; padding: 13px;
+    border-radius: 10px; font-family: 'Syne', sans-serif;
+    font-size: 14px; font-weight: 700; cursor: pointer;
+    transition: all 0.2s;
+  }
+  .plan-btn-outline {
+    background: transparent; color: var(--white);
+    border: 1px solid rgba(100,180,255,0.3);
+  }
+  .plan-btn-outline:hover { border-color: var(--cyan); background: rgba(0,198,255,0.06); }
+  .plan-btn-filled {
+    background: linear-gradient(135deg, var(--blue-bright), var(--cyan));
+    color: var(--navy); border: none;
+    box-shadow: 0 4px 20px rgba(43,127,255,0.3);
+  }
+  .plan-btn-filled:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(43,127,255,0.45); }
+
+  /* CTA SECTION */
+  .cta-section {
+    text-align: center; padding: 120px 60px;
+    position: relative; overflow: hidden;
+  }
+  .cta-section::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 80% at 50% 50%, rgba(30,95,204,0.2) 0%, transparent 70%);
+  }
+  .cta-content { position: relative; z-index: 2; max-width: 600px; margin: 0 auto; }
+  .cta-section h2 { margin-bottom: 20px; }
+  .cta-section .section-sub { margin: 0 auto 40px; text-align: center; }
+  .cta-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+  /* FOOTER */
+  footer {
+    background: var(--navy-mid);
+    border-top: 1px solid var(--card-border);
+    padding: 40px 60px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .footer-logo {
+    font-family: 'Syne', sans-serif;
+    font-size: 18px; font-weight: 800; color: var(--white);
+  }
+  .footer-logo span { color: var(--cyan); }
+  .footer-copy { font-size: 13px; color: var(--muted); }
+
+  /* ANIMATIONS */
+  .fade-up {
+    opacity: 0; transform: translateY(32px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 900px) {
+    nav { padding: 18px 24px; }
+    .nav-links { display: none; }
+    section { padding: 80px 24px; }
+    .hero { padding: 120px 24px 80px; }
+    .hero-stats { gap: 32px; flex-wrap: wrap; }
+    .problem-grid,
+    .features-grid,
+    .pricing-grid,
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .features-header { grid-template-columns: 1fr; gap: 24px; }
+    .problem-strip { padding: 60px 24px; }
+    footer { flex-direction: column; gap: 16px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo"><a href="index.html" style="text-decoration:none;color:inherit;">i<span>.</span>Exchange<span>.ai</span></a></div>
+  <ul class="nav-links">
+    <li><a href="iexchange-jobseekers.html">For Job Seekers</a></li>
+    <li><a href="iexchange-employers.html" class="active">For Employers</a></li>
+    <li><a href="index.html#how">How It Works</a></li>
+    <li><a href="index.html#testimonials">Stories</a></li>
+  </ul>
+  <button class="nav-cta">Post a Role Free</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content fade-up">
+    <div class="hero-badge">For Employers</div>
+    <h1>Hire people who <span class="highlight">actually fit.</span> Not just people who apply.</h1>
+    <p class="hero-sub">i.Exchange.ai matches your open roles to candidates using real employability signals, not just keywords on a resume. Stop drowning in applications. Start seeing the right people.</p>
+    <div class="hero-actions">
+      <button class="btn-primary">Post a Role Free</button>
+      <button class="btn-secondary">See How It Works</button>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-num">4<span>x</span></div>
+        <div class="stat-label">Faster time-to-shortlist</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">83<span>%</span></div>
+        <div class="stat-label">Match accuracy rate</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">12<span>k+</span></div>
+        <div class="stat-label">Active candidates</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM STRIP -->
+<div class="problem-strip fade-up">
+  <p class="section-label">The Real Problem</p>
+  <h2>Traditional hiring is <br>broken in 3 ways.</h2>
+  <div class="problem-grid">
+    <div class="problem-card" data-num="01">
+      <span class="problem-icon">📥</span>
+      <h3>Resume flood</h3>
+      <p>A single job post gets 200+ applications. Your team manually filters 80% of them just to find 10 worth reading. That's hours of work before a single conversation happens.</p>
+    </div>
+    <div class="problem-card" data-num="02">
+      <span class="problem-icon">🎯</span>
+      <h3>Keyword matching is a lie</h3>
+      <p>ATS filters for keywords, not capability. You miss the candidates who can actually do the job because they didn't write it the same way your JD did.</p>
+    </div>
+    <div class="problem-card" data-num="03">
+      <span class="problem-icon">💸</span>
+      <h3>Bad hires are expensive</h3>
+      <p>A wrong hire costs 1.5x to 2x annual salary when you factor in rehiring, lost productivity, and team disruption. Most happen because the fit was never properly assessed.</p>
+    </div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section class="how-section fade-up">
+  <p class="section-label">The Process</p>
+  <h2>From role to shortlist<br>in under 48 hours.</h2>
+  <div class="steps-list">
+    <div class="step">
+      <div class="step-num">STEP 01</div>
+      <div class="step-body">
+        <h3>Post your role in 5 minutes</h3>
+        <p>Describe the role, required outcomes, and team context. No rigid JD template. Our AI reads what you actually need, not just what you typed.</p>
+        <span class="step-tag">No setup fee</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">STEP 02</div>
+      <div class="step-body">
+        <h3>AI builds a fit profile, not a keyword list</h3>
+        <p>i.Exchange maps your role requirements to employability signals: skills demonstrated, career velocity, learning patterns, and role alignment. It goes beyond the resume.</p>
+        <span class="step-tag">Powered by AI matching</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">STEP 03</div>
+      <div class="step-body">
+        <h3>Receive a ranked shortlist with reasoning</h3>
+        <p>You get a curated list of top candidates, each with a match score and a plain-English explanation of why they fit. No black-box rankings.</p>
+        <span class="step-tag">Transparent scoring</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">STEP 04</div>
+      <div class="step-body">
+        <h3>Connect directly. No middlemen.</h3>
+        <p>Message candidates directly through the platform. Schedule interviews, share assessments, and track status in one place. No recruiters taking 20% cuts.</p>
+        <span class="step-tag">Direct access</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features-section fade-up">
+  <div class="features-header">
+    <div>
+      <p class="section-label">Platform Features</p>
+      <h2>Everything you need.<br>Nothing you don't.</h2>
+    </div>
+    <p class="section-sub">Built for hiring managers and HR teams who want signal, not noise. Every feature is designed to reduce time-to-hire without sacrificing quality of fit.</p>
+  </div>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">🔍</div>
+      <h3>AI Match Scoring</h3>
+      <p>Every candidate gets a match score against your role, with a breakdown of strengths and gaps. Know who to call first.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📊</div>
+      <h3>Employability Signals</h3>
+      <p>Go beyond resumes. See skill trajectory, learning velocity, and career consistency before you schedule a single interview.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">💬</div>
+      <h3>In-App Messaging</h3>
+      <p>Reach shortlisted candidates directly. No cold email chains. No recruiter proxies. Faster response, warmer context.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📋</div>
+      <h3>Pipeline Tracker</h3>
+      <p>Move candidates through stages visually. Applied, shortlisted, interviewed, offered. Your entire pipeline in one view.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🔔</div>
+      <h3>Passive Talent Alerts</h3>
+      <p>Not everyone is actively searching. Get notified when a strong-match passive candidate becomes open to opportunities.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📁</div>
+      <h3>Team Collaboration</h3>
+      <p>Add your hiring team to review, comment, and vote on candidates together. No more forwarding spreadsheets over email.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials-section fade-up">
+  <div class="testimonials-header">
+    <p class="section-label">Employer Stories</p>
+    <h2>What hiring teams say.</h2>
+  </div>
+  <div class="testimonials-grid">
+    <div class="testi-card">
+      <p class="testi-text">We cut our shortlisting time from two weeks to three days. The match reasoning was so clear that our panel actually agreed on candidates for the first time in months.</p>
+      <div class="testi-author">
+        <div class="testi-avatar">RK</div>
+        <div>
+          <div class="testi-name">Ravi K.</div>
+          <div class="testi-role">Head of Talent, FinTech Startup</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <p class="testi-text">What impressed me was seeing the employability score alongside the resume. We hired someone who wouldn't have made it past our old ATS filter. Best hire this year.</p>
+      <div class="testi-author">
+        <div class="testi-avatar">PS</div>
+        <div>
+          <div class="testi-name">Priya S.</div>
+          <div class="testi-role">HR Manager, EdTech Company</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <p class="testi-text">No recruiter fees, no middlemen, direct messaging with candidates who actually fit. For a 40-person company, this changes everything about how we hire.</p>
+      <div class="testi-author">
+        <div class="testi-avatar">AM</div>
+        <div>
+          <div class="testi-name">Arjun M.</div>
+          <div class="testi-role">Co-Founder, SaaS Platform</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing-section fade-up">
+  <div class="pricing-header">
+    <p class="section-label">Pricing</p>
+    <h2>Simple. Honest. No surprises.</h2>
+    <p class="section-sub">Start free. Scale when you're ready. No long-term contracts, no recruiter markups.</p>
+  </div>
+  <div class="pricing-grid">
+    <div class="plan-card">
+      <div class="plan-name">Starter</div>
+      <div class="plan-price"><sup>$</sup>0</div>
+      <div class="plan-period">Free forever</div>
+      <ul class="plan-features">
+        <li>2 active job posts</li>
+        <li>AI match scoring</li>
+        <li>Basic candidate profiles</li>
+        <li>In-app messaging (10/month)</li>
+        <li class="no">Pipeline tracker</li>
+        <li class="no">Passive talent alerts</li>
+        <li class="no">Team collaboration</li>
+      </ul>
+      <button class="plan-btn plan-btn-outline">Get Started Free</button>
+    </div>
+    <div class="plan-card featured">
+      <div class="plan-name">Growth</div>
+      <div class="plan-price"><sup>$</sup>149</div>
+      <div class="plan-period">per month, up to 5 users</div>
+      <ul class="plan-features">
+        <li>10 active job posts</li>
+        <li>AI match scoring with reasoning</li>
+        <li>Full employability signals</li>
+        <li>Unlimited messaging</li>
+        <li>Pipeline tracker</li>
+        <li>Passive talent alerts</li>
+        <li class="no">Team collaboration</li>
+      </ul>
+      <button class="plan-btn plan-btn-filled">Start 14-Day Trial</button>
+    </div>
+    <div class="plan-card">
+      <div class="plan-name">Scale</div>
+      <div class="plan-price">Custom</div>
+      <div class="plan-period">For high-volume teams</div>
+      <ul class="plan-features">
+        <li>Unlimited job posts</li>
+        <li>All Growth features</li>
+        <li>Team collaboration</li>
+        <li>Dedicated account manager</li>
+        <li>ATS integrations</li>
+        <li>Custom reporting</li>
+        <li>Priority support</li>
+      </ul>
+      <button class="plan-btn plan-btn-outline">Talk to Sales</button>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section fade-up">
+  <div class="cta-content">
+    <p class="section-label">Get Started</p>
+    <h2>Your next great hire is already on i.Exchange.</h2>
+    <p class="section-sub">Post your first role free. No credit card. No commitment. Just better hiring.</p>
+    <div class="cta-actions">
+      <button class="btn-primary">Post a Role Free</button>
+      <button class="btn-secondary">Book a Demo</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a href="index.html" class="footer-logo">i<span>.</span>Exchange<span>.ai</span></a>
+  <div class="footer-copy">© 2025 i.Exchange.ai. All rights reserved.</div>
+</footer>
+
+<script>
+  // Scroll-based fade-up
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

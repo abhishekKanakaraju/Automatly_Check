@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Job Seekers | i.Exchange.ai</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:        #0A1628;
+    --navy-mid:    #0F2040;
+    --navy-light:  #1A3560;
+    --blue:        #1E5FCC;
+    --blue-bright: #2B7FFF;
+    --cyan:        #00C6FF;
+    --cyan-soft:   #67E4FF;
+    --white:       #FFFFFF;
+    --offwhite:    #F0F6FF;
+    --muted:       #8BA8CC;
+    --text:        #C8DDF5;
+    --gold:        #FFD166;
+    --green:       #06D6A0;
+    --card-bg:     rgba(255,255,255,0.04);
+    --card-border: rgba(100,180,255,0.12);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--navy);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 60px;
+    background: rgba(10,22,40,0.88);
+    backdrop-filter: blur(18px);
+    border-bottom: 1px solid rgba(100,180,255,0.08);
+  }
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-size: 22px; font-weight: 800;
+    color: var(--white); letter-spacing: -0.5px;
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--cyan); }
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a {
+    color: var(--muted); text-decoration: none;
+    font-size: 14px; font-weight: 500;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover, .nav-links a.active { color: var(--white); }
+  .nav-cta {
+    background: linear-gradient(135deg, var(--blue-bright), var(--cyan));
+    color: var(--navy); border: none;
+    padding: 10px 24px; border-radius: 8px;
+    font-family: 'Syne', sans-serif;
+    font-size: 14px; font-weight: 700;
+    cursor: pointer; transition: opacity 0.2s, transform 0.15s;
+  }
+  .nav-cta:hover { opacity: 0.9; transform: translateY(-1px); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 130px 60px 90px;
+    position: relative; overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 70% at 30% 50%, rgba(0,198,255,0.13) 0%, transparent 65%),
+      radial-gradient(ellipse 50% 50% at 80% 20%, rgba(30,95,204,0.2) 0%, transparent 60%),
+      linear-gradient(180deg, #0A1628 0%, #0C1C36 100%);
+  }
+  .hero-dots {
+    position: absolute; inset: 0; opacity: 0.035;
+    background-image: radial-gradient(rgba(100,180,255,1) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+  .hero-inner {
+    position: relative; z-index: 2;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 80px; align-items: center;
+    max-width: 1200px; width: 100%;
+  }
+  .hero-left {}
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(0,198,255,0.1);
+    border: 1px solid rgba(0,198,255,0.25);
+    padding: 6px 16px; border-radius: 100px;
+    font-size: 11px; font-weight: 600;
+    color: var(--cyan); letter-spacing: 1.5px;
+    text-transform: uppercase; margin-bottom: 28px;
+  }
+  .hero-badge::before {
+    content: '';
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--cyan);
+    animation: blink 2s infinite;
+  }
+  @keyframes blink {
+    0%,100% { opacity:1; transform:scale(1); }
+    50%      { opacity:0.3; transform:scale(1.5); }
+  }
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(36px, 4.5vw, 60px);
+    font-weight: 800; line-height: 1.1;
+    color: var(--white); letter-spacing: -2px;
+    margin-bottom: 22px;
+  }
+  h1 .grad {
+    background: linear-gradient(135deg, var(--cyan), var(--blue-bright));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero-sub {
+    font-size: 17px; font-weight: 300;
+    color: var(--text); line-height: 1.75;
+    margin-bottom: 36px; max-width: 480px;
+  }
+  .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 48px; }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--blue-bright), var(--cyan));
+    color: var(--navy); border: none;
+    padding: 14px 30px; border-radius: 10px;
+    font-family: 'Syne', sans-serif;
+    font-size: 14px; font-weight: 700;
+    cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 24px rgba(43,127,255,0.35);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(43,127,255,0.5); }
+  .btn-ghost {
+    background: transparent; color: var(--white);
+    border: 1px solid rgba(100,180,255,0.3);
+    padding: 14px 30px; border-radius: 10px;
+    font-family: 'Syne', sans-serif;
+    font-size: 14px; font-weight: 600;
+    cursor: pointer; transition: border-color 0.2s, background 0.2s;
+  }
+  .btn-ghost:hover { border-color: var(--cyan); background: rgba(0,198,255,0.06); }
+  .trust-row { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+  .trust-item {
+    display: flex; align-items: center; gap: 7px;
+    font-size: 13px; color: var(--muted);
+  }
+  .trust-item span { color: var(--green); font-size: 14px; }
+
+  /* Hero right — app mockup card */
+  .hero-right { position: relative; }
+  .app-card {
+    background: var(--navy-mid);
+    border: 1px solid var(--card-border);
+    border-radius: 24px; padding: 32px;
+    position: relative; overflow: hidden;
+  }
+  .app-card::before {
+    content: '';
+    position: absolute; top: -60px; right: -60px;
+    width: 220px; height: 220px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(43,127,255,0.15), transparent 70%);
+  }
+  .app-card-label {
+    font-size: 11px; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--cyan);
+    font-weight: 600; margin-bottom: 20px;
+  }
+  .match-score-ring {
+    width: 120px; height: 120px;
+    margin: 0 auto 24px;
+    position: relative;
+  }
+  .match-score-ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+  .ring-bg { fill: none; stroke: rgba(100,180,255,0.1); stroke-width: 8; }
+  .ring-fill {
+    fill: none; stroke: url(#ringGrad); stroke-width: 8;
+    stroke-linecap: round;
+    stroke-dasharray: 283;
+    stroke-dashoffset: 51;
+    animation: fillRing 2s ease forwards;
+  }
+  @keyframes fillRing {
+    from { stroke-dashoffset: 283; }
+    to   { stroke-dashoffset: 51; }
+  }
+  .ring-label {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+  }
+  .ring-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 28px; font-weight: 800; color: var(--white);
+    line-height: 1;
+  }
+  .ring-sub { font-size: 10px; color: var(--muted); margin-top: 2px; }
+  .match-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 15px; font-weight: 700;
+    color: var(--white); text-align: center;
+    margin-bottom: 4px;
+  }
+  .match-company { font-size: 12px; color: var(--muted); text-align: center; margin-bottom: 24px; }
+  .skill-bars { display: flex; flex-direction: column; gap: 10px; }
+  .skill-row { display: flex; align-items: center; gap: 10px; }
+  .skill-name { font-size: 12px; color: var(--muted); min-width: 90px; }
+  .skill-track {
+    flex: 1; height: 6px; background: rgba(100,180,255,0.08);
+    border-radius: 100px; overflow: hidden;
+  }
+  .skill-fill {
+    height: 100%; border-radius: 100px;
+    background: linear-gradient(90deg, var(--blue-bright), var(--cyan));
+    animation: growBar 1.5s ease forwards;
+    transform-origin: left;
+  }
+  @keyframes growBar { from { width: 0; } }
+  .skill-pct { font-size: 11px; color: var(--cyan); font-weight: 600; min-width: 28px; text-align: right; }
+  .card-chips { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 24px; }
+  .chip {
+    background: rgba(43,127,255,0.1);
+    border: 1px solid rgba(43,127,255,0.2);
+    color: var(--cyan-soft); font-size: 11px; font-weight: 500;
+    padding: 5px 12px; border-radius: 100px;
+  }
+  .chip.green {
+    background: rgba(6,214,160,0.1);
+    border-color: rgba(6,214,160,0.2);
+    color: var(--green);
+  }
+
+  /* ── SECTION SHARED ── */
+  section { padding: 100px 60px; }
+  .sec-label {
+    display: inline-block;
+    font-size: 11px; letter-spacing: 2px;
+    text-transform: uppercase; font-weight: 600;
+    color: var(--cyan); margin-bottom: 14px;
+  }
+  h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(28px, 3.5vw, 44px);
+    font-weight: 800; color: var(--white);
+    letter-spacing: -1.5px; line-height: 1.15;
+    margin-bottom: 14px;
+  }
+  .sec-sub {
+    font-size: 17px; color: var(--muted);
+    max-width: 500px; line-height: 1.7;
+    font-weight: 300;
+  }
+
+  /* ── PAIN POINTS ── */
+  .pain-section {
+    background: var(--navy-mid);
+    border-top: 1px solid var(--card-border);
+    border-bottom: 1px solid var(--card-border);
+  }
+  .pain-header { margin-bottom: 56px; }
+  .pain-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 1px; background: var(--card-border);
+    border: 1px solid var(--card-border);
+    border-radius: 16px; overflow: hidden;
+  }
+  .pain-card {
+    background: var(--navy-mid);
+    padding: 36px 28px;
+    transition: background 0.25s;
+  }
+  .pain-card:hover { background: rgba(30,95,204,0.1); }
+  .pain-emoji { font-size: 30px; margin-bottom: 16px; display: block; }
+  .pain-card h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 16px; font-weight: 700;
+    color: var(--white); margin-bottom: 10px;
+  }
+  .pain-card p { font-size: 13.5px; color: var(--muted); line-height: 1.65; }
+
+  /* ── HOW IT WORKS ── */
+  .how-section {}
+  .how-header { margin-bottom: 64px; }
+  .steps-wrap {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 0; position: relative;
+  }
+  .steps-wrap::before {
+    content: '';
+    position: absolute; top: 44px; left: 10%; right: 10%; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--blue-bright), var(--cyan), var(--blue-bright), transparent);
+    opacity: 0.3;
+  }
+  .step-block { padding: 0 24px 0 0; position: relative; }
+  .step-node {
+    width: 52px; height: 52px; border-radius: 50%;
+    background: var(--navy-mid);
+    border: 2px solid var(--blue-bright);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-size: 16px; font-weight: 800; color: var(--blue-bright);
+    margin-bottom: 24px; position: relative; z-index: 2;
+    box-shadow: 0 0 20px rgba(43,127,255,0.2);
+  }
+  .step-block h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 17px; font-weight: 700;
+    color: var(--white); margin-bottom: 10px;
+  }
+  .step-block p { font-size: 13.5px; color: var(--muted); line-height: 1.65; }
+  .step-tag {
+    display: inline-block; margin-top: 14px;
+    background: rgba(255,209,102,0.1);
+    border: 1px solid rgba(255,209,102,0.2);
+    color: var(--gold); font-size: 11px; font-weight: 600;
+    padding: 4px 12px; border-radius: 100px;
+  }
+
+  /* ── FEATURES ── */
+  .features-section {
+    background: var(--navy-mid);
+    border-top: 1px solid var(--card-border);
+  }
+  .features-top {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 80px; align-items: end; margin-bottom: 60px;
+  }
+  .feat-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .feat-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--card-border);
+    border-radius: 16px; padding: 32px 28px;
+    transition: border-color 0.25s, transform 0.25s;
+  }
+  .feat-card:hover { border-color: rgba(100,180,255,0.3); transform: translateY(-4px); }
+  .feat-icon {
+    width: 46px; height: 46px;
+    background: rgba(43,127,255,0.1);
+    border: 1px solid rgba(43,127,255,0.2);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; margin-bottom: 20px;
+  }
+  .feat-card h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 16px; font-weight: 700;
+    color: var(--white); margin-bottom: 10px;
+  }
+  .feat-card p { font-size: 13.5px; color: var(--muted); line-height: 1.65; }
+
+  /* ── COMPARISON ── */
+  .compare-section {}
+  .compare-header { text-align: center; margin-bottom: 56px; }
+  .compare-header .sec-sub { margin: 0 auto; text-align: center; }
+  .compare-table {
+    max-width: 860px; margin: 0 auto;
+    border: 1px solid var(--card-border);
+    border-radius: 20px; overflow: hidden;
+  }
+  .compare-thead {
+    display: grid; grid-template-columns: 2fr 1fr 1fr;
+    background: var(--navy-mid);
+    border-bottom: 1px solid var(--card-border);
+  }
+  .th {
+    padding: 20px 24px;
+    font-family: 'Syne', sans-serif;
+    font-size: 13px; font-weight: 700;
+    color: var(--muted); letter-spacing: 0.5px;
+  }
+  .th.highlight { color: var(--cyan); }
+  .compare-row {
+    display: grid; grid-template-columns: 2fr 1fr 1fr;
+    border-bottom: 1px solid rgba(100,180,255,0.06);
+    transition: background 0.2s;
+  }
+  .compare-row:last-child { border-bottom: none; }
+  .compare-row:hover { background: rgba(43,127,255,0.04); }
+  .td {
+    padding: 18px 24px;
+    font-size: 14px; color: var(--text);
+    display: flex; align-items: center;
+  }
+  .td.feature-name { color: var(--white); font-weight: 500; }
+  .td.yes { color: var(--green); font-size: 18px; }
+  .td.no  { color: rgba(100,180,255,0.3); font-size: 18px; }
+
+  /* ── SOCIAL PROOF ── */
+  .proof-section {
+    background: var(--navy-mid);
+    border-top: 1px solid var(--card-border);
+  }
+  .proof-header { margin-bottom: 56px; }
+  .proof-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .proof-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 16px; padding: 32px;
+    transition: border-color 0.25s, transform 0.25s;
+    position: relative;
+  }
+  .proof-card:hover { border-color: rgba(100,180,255,0.3); transform: translateY(-4px); }
+  .proof-card::before {
+    content: '"';
+    position: absolute; top: 20px; right: 24px;
+    font-family: 'Syne', sans-serif; font-size: 72px; font-weight: 800;
+    color: rgba(43,127,255,0.1); line-height: 1;
+  }
+  .proof-stars { color: var(--gold); font-size: 14px; margin-bottom: 14px; letter-spacing: 2px; }
+  .proof-text {
+    font-size: 14px; line-height: 1.75;
+    color: var(--text); font-style: italic;
+    margin-bottom: 24px; font-weight: 300;
+  }
+  .proof-author { display: flex; align-items: center; gap: 12px; }
+  .proof-avatar {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--blue-bright), var(--cyan));
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-size: 14px; font-weight: 700; color: var(--navy); flex-shrink: 0;
+  }
+  .proof-name { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; color: var(--white); }
+  .proof-role { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+  /* ── STATS BAND ── */
+  .stats-band {
+    padding: 70px 60px;
+    background: linear-gradient(135deg, rgba(30,95,204,0.15), rgba(0,198,255,0.08));
+    border-top: 1px solid var(--card-border);
+    border-bottom: 1px solid var(--card-border);
+  }
+  .stats-inner {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 0; text-align: center;
+  }
+  .stat-col { padding: 0 20px; border-right: 1px solid rgba(100,180,255,0.1); }
+  .stat-col:last-child { border-right: none; }
+  .stat-big {
+    font-family: 'Syne', sans-serif;
+    font-size: 48px; font-weight: 800;
+    color: var(--white); line-height: 1;
+    letter-spacing: -2px;
+  }
+  .stat-big span { color: var(--cyan); }
+  .stat-desc { font-size: 13px; color: var(--muted); margin-top: 8px; }
+
+  /* ── CTA ── */
+  .cta-section {
+    text-align: center; padding: 120px 60px;
+    position: relative; overflow: hidden;
+  }
+  .cta-section::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 80% 80% at 50% 50%, rgba(0,198,255,0.12) 0%, transparent 70%);
+  }
+  .cta-inner { position: relative; z-index: 2; max-width: 560px; margin: 0 auto; }
+  .cta-section h2 { margin-bottom: 16px; }
+  .cta-section .sec-sub { margin: 0 auto 40px; text-align: center; }
+  .cta-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+  .download-badges { display: flex; gap: 14px; justify-content: center; margin-top: 20px; }
+  .badge {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(100,180,255,0.2);
+    padding: 12px 20px; border-radius: 12px;
+    font-size: 13px; color: var(--white);
+    font-weight: 500; cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .badge:hover { background: rgba(43,127,255,0.12); border-color: var(--blue-bright); }
+  .badge-icon { font-size: 22px; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy-mid);
+    border-top: 1px solid var(--card-border);
+    padding: 40px 60px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .footer-logo {
+    font-family: 'Syne', sans-serif;
+    font-size: 18px; font-weight: 800; color: var(--white);
+    text-decoration: none;
+  }
+  .footer-logo span { color: var(--cyan); }
+  .footer-links { display: flex; gap: 28px; }
+  .footer-links a {
+    font-size: 13px; color: var(--muted);
+    text-decoration: none; transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--white); }
+  .footer-copy { font-size: 13px; color: var(--muted); }
+
+  /* ── ANIMATIONS ── */
+  .fade-up { opacity: 0; transform: translateY(32px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+  .delay-1 { transition-delay: 0.1s; }
+  .delay-2 { transition-delay: 0.2s; }
+  .delay-3 { transition-delay: 0.3s; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 960px) {
+    nav { padding: 18px 24px; }
+    .nav-links { display: none; }
+    section, .pain-section, .features-section, .proof-section { padding: 80px 24px; }
+    .hero { padding: 120px 24px 80px; }
+    .hero-inner { grid-template-columns: 1fr; gap: 48px; }
+    .hero-right { display: none; }
+    .pain-grid,
+    .steps-wrap,
+    .feat-grid,
+    .proof-grid,
+    .stats-inner { grid-template-columns: 1fr; }
+    .steps-wrap::before { display: none; }
+    .features-top { grid-template-columns: 1fr; gap: 24px; }
+    .stats-band { padding: 60px 24px; }
+    .stat-col { border-right: none; border-bottom: 1px solid rgba(100,180,255,0.1); padding: 24px 0; }
+    .stat-col:last-child { border-bottom: none; }
+    footer { flex-direction: column; gap: 20px; text-align: center; }
+    .footer-links { flex-wrap: wrap; justify-content: center; }
+    .compare-thead, .compare-row { grid-template-columns: 2fr 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">i<span>.</span>Exchange<span>.ai</span></a>
+  <ul class="nav-links">
+    <li><a href="iexchange-jobseekers.html" class="active">For Job Seekers</a></li>
+    <li><a href="iexchange-employers.html">For Employers</a></li>
+    <li><a href="index.html#how">How It Works</a></li>
+    <li><a href="index.html#testimonials">Stories</a></li>
+  </ul>
+  <button class="nav-cta">Download Free</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-dots"></div>
+  <div class="hero-inner">
+    <div class="hero-left fade-up">
+      <div class="hero-badge">For Job Seekers</div>
+      <h1>Stop applying<br>everywhere.<br><span class="grad">Apply where you fit.</span></h1>
+      <p class="hero-sub">i.Exchange.ai matches you to jobs using your actual skills, not just keywords on your resume. Know your match score before you apply. Stop guessing. Start landing.</p>
+      <div class="hero-btns">
+        <button class="btn-primary">Get Matched Free</button>
+        <button class="btn-ghost">See How It Works</button>
+      </div>
+      <div class="trust-row">
+        <div class="trust-item"><span>✓</span> Free to use</div>
+        <div class="trust-item"><span>✓</span> No recruiter middlemen</div>
+        <div class="trust-item"><span>✓</span> Real skill matching</div>
+      </div>
+    </div>
+    <div class="hero-right fade-up delay-2">
+      <div class="app-card">
+        <svg width="0" height="0">
+          <defs>
+            <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" style="stop-color:#2B7FFF"/>
+              <stop offset="100%" style="stop-color:#00C6FF"/>
+            </linearGradient>
+          </defs>
+        </svg>
+        <div class="app-card-label">Your AI Match Score</div>
+        <div class="match-score-ring">
+          <svg viewBox="0 0 100 100">
+            <circle class="ring-bg" cx="50" cy="50" r="45"/>
+            <circle class="ring-fill" cx="50" cy="50" r="45"/>
+          </svg>
+          <div class="ring-label">
+            <div class="ring-num">82%</div>
+            <div class="ring-sub">Match</div>
+          </div>
+        </div>
+        <div class="match-title">Senior Product Designer</div>
+        <div class="match-company">Razorpay · Bangalore · ₹28–36L</div>
+        <div class="skill-bars">
+          <div class="skill-row">
+            <div class="skill-name">Figma</div>
+            <div class="skill-track"><div class="skill-fill" style="width:95%"></div></div>
+            <div class="skill-pct">95%</div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-name">UX Research</div>
+            <div class="skill-track"><div class="skill-fill" style="width:80%"></div></div>
+            <div class="skill-pct">80%</div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-name">Design Systems</div>
+            <div class="skill-track"><div class="skill-fill" style="width:72%"></div></div>
+            <div class="skill-pct">72%</div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-name">Prototyping</div>
+            <div class="skill-track"><div class="skill-fill" style="width:88%"></div></div>
+            <div class="skill-pct">88%</div>
+          </div>
+        </div>
+        <div class="card-chips">
+          <div class="chip green">Strong Match</div>
+          <div class="chip">3 skill gaps identified</div>
+          <div class="chip">Apply Now</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAIN POINTS -->
+<section class="pain-section fade-up">
+  <div class="pain-header">
+    <p class="sec-label">Sound Familiar?</p>
+    <h2>Why job hunting feels like<br>a full-time job that never pays.</h2>
+  </div>
+  <div class="pain-grid">
+    <div class="pain-card">
+      <span class="pain-emoji">📤</span>
+      <h3>Spray and pray applying</h3>
+      <p>Sending 50 applications hoping 2 respond is not a strategy. It's exhausting, demoralizing, and statistically broken.</p>
+    </div>
+    <div class="pain-card">
+      <span class="pain-emoji">🤖</span>
+      <h3>Rejected by a robot</h3>
+      <p>ATS systems filter you out before any human sees your profile, because your resume used different words than the JD.</p>
+    </div>
+    <div class="pain-card">
+      <span class="pain-emoji">🌀</span>
+      <h3>No idea why you didn't get called</h3>
+      <p>No feedback. No score. No explanation. Just silence. You don't know if the problem is your skills, your resume, or the role.</p>
+    </div>
+    <div class="pain-card">
+      <span class="pain-emoji">📉</span>
+      <h3>Skills going unrecognized</h3>
+      <p>You have the ability to do the job but can't prove it through a one-page document that strips all context from your career.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="fade-up">
+  <div class="how-header">
+    <p class="sec-label">How It Works</p>
+    <h2>From profile to offer.<br>4 steps. No guessing.</h2>
+  </div>
+  <div class="steps-wrap">
+    <div class="step-block">
+      <div class="step-node">1</div>
+      <h3>Build your skill profile</h3>
+      <p>Import your resume or fill in your experience. Our AI maps your skills, depth, and trajectory into a live employability profile.</p>
+      <span class="step-tag">Takes 5 minutes</span>
+    </div>
+    <div class="step-block">
+      <div class="step-node">2</div>
+      <h3>See your match score</h3>
+      <p>Every job shows you a fit score before you apply. Know exactly which roles you're strong for and which ones need skill development first.</p>
+      <span class="step-tag">Transparent scoring</span>
+    </div>
+    <div class="step-block">
+      <div class="step-node">3</div>
+      <h3>Close your skill gaps</h3>
+      <p>For roles you want but aren't fully ready for, get a personalized upskilling path. Know what to learn to move from 65% to 90% match.</p>
+      <span class="step-tag">AI-guided learning</span>
+    </div>
+    <div class="step-block">
+      <div class="step-node">4</div>
+      <h3>Apply smart. Get noticed.</h3>
+      <p>Apply only to roles where you're a strong match. Employers on i.Exchange see your skill profile, not just your resume. Higher callbacks guaranteed.</p>
+      <span class="step-tag">Direct to employer</span>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features-section fade-up">
+  <div class="features-top">
+    <div>
+      <p class="sec-label">What You Get</p>
+      <h2>Tools built for people<br>who want to get hired right.</h2>
+    </div>
+    <p class="sec-sub">Every feature is designed around one goal: help you find the job that fits your actual skills and career direction, faster than any other platform.</p>
+  </div>
+  <div class="feat-grid">
+    <div class="feat-card">
+      <div class="feat-icon">🧠</div>
+      <h3>AI Skill Mapping</h3>
+      <p>Your experience is parsed into a structured skill graph. Depth, breadth, and recency, all accounted for, not just listed.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">🎯</div>
+      <h3>Role Match Scores</h3>
+      <p>See a percentage fit before applying to any role. Understand why you match and what specific skills drive the score.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">📈</div>
+      <h3>Employability Score</h3>
+      <p>A single score that reflects how hireable you are right now, based on skills, trajectory, and market demand.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">🗺</div>
+      <h3>Skill Gap Navigator</h3>
+      <p>For any role you want, see exactly what you're missing and get a curated path to close the gap with courses and projects.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">🔔</div>
+      <h3>Smart Job Alerts</h3>
+      <p>Only get notified about roles where your match score is above your threshold. No more irrelevant job spam in your inbox.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">💬</div>
+      <h3>Direct Employer Access</h3>
+      <p>When employers shortlist you, message them directly. No recruiter proxy, no 30% markup on your salary. Just you and them.</p>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARISON TABLE -->
+<section class="compare-section fade-up">
+  <div class="compare-header">
+    <p class="sec-label">Why i.Exchange</p>
+    <h2>Not all job platforms<br>are equal.</h2>
+    <p class="sec-sub">Here is how we compare to traditional job portals.</p>
+  </div>
+  <div class="compare-table">
+    <div class="compare-thead">
+      <div class="th">Feature</div>
+      <div class="th">Traditional Job Portal</div>
+      <div class="th highlight">i.Exchange.ai</div>
+    </div>
+    <div class="compare-row">
+      <div class="td feature-name">AI skill-to-job matching</div>
+      <div class="td no">✗</div>
+      <div class="td yes">✓</div>
+    </div>
+    <div class="compare-row">
+      <div class="td feature-name">Match score before applying</div>
+      <div class="td no">✗</div>
+      <div class="td yes">✓</div>
+    </div>
+    <div class="compare-row">
+      <div class="td feature-name">Skill gap feedback</div>
+      <div class="td no">✗</div>
+      <div class="td yes">✓</div>
+    </div>
+    <div class="compare-row">
+      <div class="td feature-name">Employability score</div>
+      <div class="td no">✗</div>
+      <div class="td yes">✓</div>
+    </div>
+    <div class="compare-row">
+      <div class="td feature-name">Direct employer messaging</div>
+      <div class="td no">✗</div>
+      <div class="td yes">✓</div>
+    </div>
+    <div class="compare-row">
+      <div class="td feature-name">No recruiter markups</div>
+      <div class="td no">✗</div>
+      <div class="td yes">✓</div>
+    </div>
+    <div class="compare-row">
+      <div class="td feature-name">Free to use</div>
+      <div class="td" style="color:var(--muted)">Freemium</div>
+      <div class="td yes">✓</div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS BAND -->
+<div class="stats-band fade-up">
+  <div class="stats-inner">
+    <div class="stat-col">
+      <div class="stat-big">12<span>k+</span></div>
+      <div class="stat-desc">Active job seekers on platform</div>
+    </div>
+    <div class="stat-col">
+      <div class="stat-big">4<span>x</span></div>
+      <div class="stat-desc">Higher callback rate vs cold applying</div>
+    </div>
+    <div class="stat-col">
+      <div class="stat-big">83<span>%</span></div>
+      <div class="stat-desc">Match accuracy on shortlisted roles</div>
+    </div>
+    <div class="stat-col">
+      <div class="stat-big">9</div>
+      <div class="stat-desc">Countries with active employer network</div>
+    </div>
+  </div>
+</div>
+
+<!-- TESTIMONIALS -->
+<section class="proof-section fade-up">
+  <div class="proof-header">
+    <p class="sec-label">Real Stories</p>
+    <h2>People who stopped guessing<br>and started landing.</h2>
+  </div>
+  <div class="proof-grid">
+    <div class="proof-card">
+      <div class="proof-stars">★★★★★</div>
+      <p class="proof-text">I spent 3 months applying everywhere and hearing nothing. Two weeks on i.Exchange and I had 4 interviews. The match score told me exactly where I stood. That clarity changed everything.</p>
+      <div class="proof-author">
+        <div class="proof-avatar">NR</div>
+        <div>
+          <div class="proof-name">Neha R.</div>
+          <div class="proof-role">UX Designer, hired at a Series B startup</div>
+        </div>
+      </div>
+    </div>
+    <div class="proof-card">
+      <div class="proof-stars">★★★★★</div>
+      <p class="proof-text">The skill gap navigator showed me I was 72% matched to my target role. I completed two courses it suggested and hit 89%. Got the interview the next week. This is what job hunting should feel like.</p>
+      <div class="proof-author">
+        <div class="proof-avatar">KS</div>
+        <div>
+          <div class="proof-name">Karthik S.</div>
+          <div class="proof-role">Data Analyst, transitioned from finance</div>
+        </div>
+      </div>
+    </div>
+    <div class="proof-card">
+      <div class="proof-stars">★★★★★</div>
+      <p class="proof-text">No more spraying applications into the void. I only apply to roles where I score above 75%. My interview conversion went from 2% to 28%. That's not luck. That's precision.</p>
+      <div class="proof-author">
+        <div class="proof-avatar">AM</div>
+        <div>
+          <div class="proof-name">Ananya M.</div>
+          <div class="proof-role">Product Manager, moved from ops</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section fade-up">
+  <div class="cta-inner">
+    <p class="sec-label">Get Started</p>
+    <h2>Your next job is already waiting for you on i.Exchange.</h2>
+    <p class="sec-sub">Build your profile free. See your match score. Apply where you actually fit.</p>
+    <div class="cta-btns">
+      <button class="btn-primary">Build My Profile Free</button>
+      <button class="btn-ghost">Watch a Demo</button>
+    </div>
+    <div class="download-badges">
+      <div class="badge">
+        <span class="badge-icon">🍎</span>
+        <div>
+          <div style="font-size:10px;color:var(--muted)">Download on the</div>
+          <div style="font-weight:700">App Store</div>
+        </div>
+      </div>
+      <div class="badge">
+        <span class="badge-icon">▶</span>
+        <div>
+          <div style="font-size:10px;color:var(--muted)">Get it on</div>
+          <div style="font-weight:700">Google Play</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a href="index.html" class="footer-logo">i<span>.</span>Exchange<span>.ai</span></a>
+  <div class="footer-links">
+    <a href="#">For Job Seekers</a>
+    <a href="iexchange-employers.html">For Employers</a>
+    <a href="#">Privacy</a>
+    <a href="#">Terms</a>
+  </div>
+  <div class="footer-copy">© 2025 i.Exchange.ai</div>
+</footer>
+
+<script>
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
