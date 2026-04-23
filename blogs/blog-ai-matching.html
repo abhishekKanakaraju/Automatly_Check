@@ -1,0 +1,349 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Skill Code Matching Launch | i.Exchange.ai Blog</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0A1628; --navy-mid: #0F2040; --blue-bright: #2B7FFF;
+    --cyan: #00C6FF; --white: #FFFFFF; --muted: #8BA8CC;
+    --text: #C8DDF5; --gold: #FFD166; --green: #06D6A0;
+    --card-bg: rgba(255,255,255,0.04); --card-border: rgba(100,180,255,0.12);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--navy); color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 16px; line-height: 1.6; overflow-x: hidden; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 60px;
+    background: rgba(10,22,40,0.88); backdrop-filter: blur(18px);
+    border-bottom: 1px solid rgba(100,180,255,0.08);
+  }
+  .nav-logo { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 800; color: var(--white); letter-spacing: -0.5px; text-decoration: none; }
+  .nav-logo span { color: var(--cyan); }
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--white); }
+  .nav-cta { background: linear-gradient(135deg, var(--blue-bright), var(--cyan)); color: var(--navy); border: none; padding: 10px 24px; border-radius: 8px; font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; cursor: pointer; }
+
+  /* ARTICLE HERO */
+  .article-hero {
+    padding: 140px 60px 60px; position: relative; overflow: hidden;
+    border-bottom: 1px solid var(--card-border);
+  }
+  .article-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 50% 70% at 50% 0%, rgba(30,95,204,0.15) 0%, transparent 65%); }
+  .article-hero-inner { position: relative; z-index: 2; max-width: 780px; margin: 0 auto; }
+  .breadcrumb { display: flex; align-items: center; gap: 8px; margin-bottom: 24px; font-size: 13px; color: var(--muted); }
+  .breadcrumb a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .breadcrumb a:hover { color: var(--cyan); }
+  .breadcrumb span { color: rgba(100,180,255,0.3); }
+  .article-tag { background: rgba(43,127,255,0.1); border: 1px solid rgba(43,127,255,0.2); color: var(--cyan); font-size: 11px; font-weight: 600; padding: 4px 14px; border-radius: 100px; display: inline-block; margin-bottom: 20px; letter-spacing: 1px; text-transform: uppercase; }
+  .article-title { font-family: 'Syne', sans-serif; font-size: clamp(28px, 4vw, 48px); font-weight: 800; color: var(--white); letter-spacing: -1.5px; line-height: 1.15; margin-bottom: 20px; }
+  .article-subtitle { font-size: 18px; color: var(--muted); font-weight: 300; line-height: 1.7; margin-bottom: 32px; max-width: 640px; }
+  .article-meta { display: flex; align-items: center; gap: 24px; padding-top: 24px; border-top: 1px solid rgba(100,180,255,0.08); flex-wrap: wrap; }
+  .author { display: flex; align-items: center; gap: 10px; }
+  .author-avatar { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, var(--blue-bright), var(--cyan)); display: flex; align-items: center; justify-content: center; font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; color: var(--navy); }
+  .author-name { font-size: 13px; font-weight: 600; color: var(--white); }
+  .author-role { font-size: 11px; color: var(--muted); }
+  .meta-divider { width: 1px; height: 28px; background: rgba(100,180,255,0.1); }
+  .meta-item { font-size: 13px; color: var(--muted); }
+
+  /* ARTICLE BODY */
+  .article-layout { display: grid; grid-template-columns: 1fr 280px; gap: 60px; max-width: 1100px; margin: 0 auto; padding: 60px 60px 100px; }
+  .article-body { min-width: 0; }
+  .article-cover { width: 100%; aspect-ratio: 16/7; background: linear-gradient(135deg, rgba(43,127,255,0.12), rgba(0,198,255,0.06)); border: 1px solid var(--card-border); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 80px; margin-bottom: 48px; }
+
+  /* ARTICLE CONTENT STYLES */
+  .article-content h2 { font-family: 'Syne', sans-serif; font-size: 26px; font-weight: 800; color: var(--white); letter-spacing: -0.5px; margin: 40px 0 16px; line-height: 1.2; }
+  .article-content h3 { font-family: 'Syne', sans-serif; font-size: 19px; font-weight: 700; color: var(--white); margin: 28px 0 12px; }
+  .article-content p { font-size: 16px; color: var(--text); line-height: 1.8; margin-bottom: 20px; }
+  .article-content ul, .article-content ol { padding-left: 24px; margin-bottom: 20px; }
+  .article-content li { font-size: 15px; color: var(--text); line-height: 1.75; margin-bottom: 8px; }
+  .article-content strong { color: var(--white); font-weight: 600; }
+  .article-content a { color: var(--cyan); text-decoration: none; border-bottom: 1px solid rgba(0,198,255,0.3); transition: border-color 0.2s; }
+  .article-content a:hover { border-color: var(--cyan); }
+  .callout { background: rgba(43,127,255,0.08); border: 1px solid rgba(43,127,255,0.2); border-left: 3px solid var(--blue-bright); border-radius: 0 12px 12px 0; padding: 20px 24px; margin: 28px 0; }
+  .callout p { margin: 0; color: var(--text); font-size: 15px; }
+  .stat-highlight { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 32px 0; }
+  .stat-box { background: var(--navy-mid); border: 1px solid var(--card-border); border-radius: 12px; padding: 24px 20px; text-align: center; }
+  .stat-box-num { font-family: 'Syne', sans-serif; font-size: 36px; font-weight: 800; color: var(--white); line-height: 1; }
+  .stat-box-num span { color: var(--cyan); }
+  .stat-box-label { font-size: 12px; color: var(--muted); margin-top: 6px; }
+  .divider { height: 1px; background: rgba(100,180,255,0.08); margin: 40px 0; }
+
+  /* ARTICLE TAGS + SHARE */
+  .article-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 48px; padding-top: 32px; border-top: 1px solid rgba(100,180,255,0.08); flex-wrap: gap; gap: 16px; }
+  .article-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+  .article-tag-pill { background: rgba(255,255,255,0.04); border: 1px solid var(--card-border); color: var(--muted); font-size: 12px; padding: 5px 14px; border-radius: 100px; }
+  .share-label { font-size: 13px; color: var(--muted); margin-right: 8px; }
+  .share-btn { background: rgba(255,255,255,0.04); border: 1px solid var(--card-border); color: var(--text); font-size: 13px; font-weight: 500; padding: 8px 16px; border-radius: 8px; cursor: pointer; transition: border-color 0.2s; }
+  .share-btn:hover { border-color: var(--cyan); color: var(--white); }
+
+  /* SIDEBAR */
+  .article-sidebar { position: sticky; top: 90px; height: fit-content; }
+  .sidebar-card { background: var(--navy-mid); border: 1px solid var(--card-border); border-radius: 16px; padding: 24px; margin-bottom: 20px; }
+  .sidebar-label { font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--cyan); font-weight: 600; margin-bottom: 16px; }
+  .toc-list { list-style: none; display: flex; flex-direction: column; gap: 2px; }
+  .toc-list a { font-size: 13px; color: var(--muted); text-decoration: none; padding: 6px 10px; border-radius: 8px; display: block; transition: background 0.2s, color 0.2s; border-left: 2px solid transparent; }
+  .toc-list a:hover { background: rgba(43,127,255,0.08); color: var(--white); border-left-color: var(--cyan); }
+  .related-post { display: flex; gap: 12px; align-items: flex-start; padding: 12px 0; border-bottom: 1px solid rgba(100,180,255,0.06); text-decoration: none; }
+  .related-post:last-child { border-bottom: none; padding-bottom: 0; }
+  .related-icon { width: 40px; height: 40px; border-radius: 8px; background: rgba(43,127,255,0.1); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+  .related-text h4 { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; color: var(--white); line-height: 1.3; margin-bottom: 4px; }
+  .related-text span { font-size: 11px; color: var(--muted); }
+  .cta-card { background: linear-gradient(135deg, rgba(43,127,255,0.15), rgba(0,198,255,0.08)); border: 1px solid rgba(43,127,255,0.2); border-radius: 16px; padding: 28px 24px; text-align: center; }
+  .cta-card h3 { font-family: 'Syne', sans-serif; font-size: 17px; font-weight: 800; color: var(--white); margin-bottom: 10px; }
+  .cta-card p { font-size: 13px; color: var(--muted); margin-bottom: 20px; line-height: 1.6; }
+  .cta-btn { width: 100%; background: linear-gradient(135deg, var(--blue-bright), var(--cyan)); color: var(--navy); border: none; padding: 12px; border-radius: 10px; font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; cursor: pointer; transition: opacity 0.2s; }
+  .cta-btn:hover { opacity: 0.9; }
+
+  footer { background: var(--navy-mid); border-top: 1px solid var(--card-border); padding: 40px 60px; display: flex; align-items: center; justify-content: space-between; }
+  .footer-logo { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 800; color: var(--white); text-decoration: none; }
+  .footer-logo span { color: var(--cyan); }
+  .footer-links { display: flex; gap: 28px; }
+  .footer-links a { font-size: 13px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--white); }
+  .footer-copy { font-size: 13px; color: var(--muted); }
+
+  .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 960px) {
+    nav { padding: 18px 24px; }
+    .nav-links { display: none; }
+    .article-hero { padding: 120px 24px 48px; }
+    .article-layout { grid-template-columns: 1fr; padding: 40px 24px 80px; gap: 40px; }
+    .article-sidebar { position: static; }
+    .stat-highlight { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 20px; text-align: center; }
+    .footer-links { flex-wrap: wrap; justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">i<span>.</span>Exchange<span>.ai</span></a>
+  <ul class="nav-links">
+    <li><a href="/for-job-seekers">For Job Seekers</a></li>
+    <li><a href="/for-employers">For Employers</a></li>
+    <li><a href="/how-it-works">How It Works</a></li>
+    <li><a href="/blog" class="active">Blog</a></li>
+  </ul>
+  <button class="nav-cta">Get Started Free</button>
+</nav>
+
+<!-- ARTICLE HERO -->
+<div class="article-hero">
+  <div class="article-hero-inner fade-up">
+    <div class="breadcrumb">
+      <a href="/">Home</a>
+      <span>/</span>
+      <a href="/blog">Blog</a>
+      <span>/</span>
+      <span style="color:var(--text)">AI Matching Launch</span>
+    </div>
+    <div class="article-tag">Product Update</div>
+    <h1 class="article-title">We just launched AI Skill Code Matching. Here's what changed.</h1>
+    <p class="article-subtitle">The biggest update to i.Exchange.ai since launch. Our new matching engine moves beyond keyword overlap to map skills to standardized industry codes.</p>
+    <div class="article-meta">
+      <div class="author">
+        <div class="author-avatar">iX</div>
+        <div>
+          <div class="author-name">i.Exchange Team</div>
+          <div class="author-role">Product</div>
+        </div>
+      </div>
+      <div class="meta-divider"></div>
+      <div class="meta-item">April 20, 2026</div>
+      <div class="meta-divider"></div>
+      <div class="meta-item">5 min read</div>
+    </div>
+  </div>
+</div>
+
+<!-- ARTICLE LAYOUT -->
+<div class="article-layout">
+
+  <!-- BODY -->
+  <div class="article-body fade-up">
+    <div class="article-cover">🧠</div>
+
+    <div class="article-content">
+
+      <p>Today we're shipping the most significant update to i.Exchange.ai since we launched: a completely new AI matching engine built on skill codes rather than keyword overlap. This changes how every match score is calculated — for both job seekers and employers.</p>
+
+      <p>Here's what was broken before, what we built, and what it means for you.</p>
+
+      <h2 id="problem">The problem with keyword matching</h2>
+
+      <p>Every major job platform — including most ATS systems used by enterprise HR — works the same way under the hood. They look for the same words in your resume that appear in the job description.</p>
+
+      <p>This creates a well-known problem: a candidate who lists <strong>"data analysis"</strong> doesn't match a role that says <strong>"analytics"</strong>. A developer with <strong>"Node.js"</strong> experience gets filtered out of a role asking for <strong>"backend JavaScript"</strong>. The skills are identical. The words are different.</p>
+
+      <div class="callout">
+        <p>In internal testing, we found that keyword-based matching missed an average of <strong>34% of qualified candidates</strong> — people who could genuinely do the job but phrased their skills differently.</p>
+      </div>
+
+      <h2 id="solution">What we built instead</h2>
+
+      <p>Our new engine maps both sides — the candidate's experience and the job requirements — to a standardized library of <strong>skill codes</strong>. These codes are industry-standard identifiers for capabilities, independent of the words used to describe them.</p>
+
+      <p>So "data analysis", "analytics", "quantitative analysis", and "data interpretation" all map to the same skill code. The match happens at the code level, not the word level.</p>
+
+      <h3 id="how">How it works in practice</h3>
+
+      <p>When you upload your resume or describe your experience, our AI does three things:</p>
+
+      <ul>
+        <li>Extracts every skill mentioned, implied, or demonstrated through your experience</li>
+        <li>Maps each skill to one or more standardized skill codes</li>
+        <li>Scores your depth in each skill based on years of use, recency, and context</li>
+      </ul>
+
+      <p>When an employer posts a role, the same process runs on the job description. The match score you see is the overlap between your skill code profile and the role's skill code requirements — weighted by how important each skill is to the role.</p>
+
+      <div class="stat-highlight">
+        <div class="stat-box">
+          <div class="stat-box-num">83<span>%</span></div>
+          <div class="stat-box-label">Match accuracy on post-hire feedback</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-box-num">34<span>%</span></div>
+          <div class="stat-box-label">More qualified candidates surfaced</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-box-num">4<span>x</span></div>
+          <div class="stat-box-label">Higher interview callback rate</div>
+        </div>
+      </div>
+
+      <h2 id="impact">What this means for job seekers</h2>
+
+      <p>Your match scores will look different from today. In most cases they'll be higher — because the engine now recognizes skills you have that were previously missed due to phrasing. In some cases they'll be lower, because we're now more precise about the depth required for certain roles.</p>
+
+      <p>Either way, the score is more accurate. And a more accurate score means you spend your time applying to roles you can actually get — not filtering through irrelevant matches.</p>
+
+      <h2 id="employers">What this means for employers</h2>
+
+      <p>Your shortlists are now ranked on actual skill fit, not resume keyword density. Candidates who wrote their resume in plain language — or who have skills your JD described differently — will now appear in your shortlist when they should.</p>
+
+      <div class="callout">
+        <p>In our beta test with 40 employers, the new engine surfaced an average of <strong>2.3 additional qualified candidates per role</strong> who would have been filtered out by the old keyword system.</p>
+      </div>
+
+      <h2 id="next">What's coming next</h2>
+
+      <p>This update is the foundation for several features we're building on top of it:</p>
+
+      <ul>
+        <li><strong>Skill trajectory scoring</strong> — weighting skills that are growing in demand more heavily</li>
+        <li><strong>Role evolution alerts</strong> — notifying you when a role's skill requirements shift in a direction that improves your match</li>
+        <li><strong>Employer skill gap reports</strong> — showing hiring teams which skills are hardest to find in their target market</li>
+      </ul>
+
+      <p>These will roll out over the next two quarters. If you want to be notified when they launch, make sure your profile is active on i.Exchange.ai.</p>
+
+      <div class="divider"></div>
+
+      <p>Questions about the new engine or how your score changed? Reach out to us directly through the platform. We read everything.</p>
+
+    </div>
+
+    <div class="article-footer">
+      <div class="article-tags">
+        <span class="article-tag-pill">Product Update</span>
+        <span class="article-tag-pill">AI Matching</span>
+        <span class="article-tag-pill">Skill Codes</span>
+        <span class="article-tag-pill">Platform</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span class="share-label">Share</span>
+        <button class="share-btn">LinkedIn</button>
+        <button class="share-btn">Copy Link</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SIDEBAR -->
+  <div class="article-sidebar fade-up">
+
+    <!-- TOC -->
+    <div class="sidebar-card">
+      <div class="sidebar-label">In This Article</div>
+      <ul class="toc-list">
+        <li><a href="#problem">The problem with keywords</a></li>
+        <li><a href="#solution">What we built instead</a></li>
+        <li><a href="#how">How it works in practice</a></li>
+        <li><a href="#impact">What this means for job seekers</a></li>
+        <li><a href="#employers">What this means for employers</a></li>
+        <li><a href="#next">What's coming next</a></li>
+      </ul>
+    </div>
+
+    <!-- RELATED -->
+    <div class="sidebar-card">
+      <div class="sidebar-label">Related Articles</div>
+      <a href="/blog/employability-score-update" class="related-post">
+        <div class="related-icon">📊</div>
+        <div class="related-text">
+          <h4>Employability Score 2.0</h4>
+          <span>April 15, 2026</span>
+        </div>
+      </a>
+      <a href="/blog/skill-gap-navigator" class="related-post">
+        <div class="related-icon">🗺️</div>
+        <div class="related-text">
+          <h4>Introducing the Skill Gap Navigator</h4>
+          <span>April 3, 2026</span>
+        </div>
+      </a>
+      <a href="/blog/9-country-expansion" class="related-post">
+        <div class="related-icon">🌍</div>
+        <div class="related-text">
+          <h4>Now live in 9 countries</h4>
+          <span>April 10, 2026</span>
+        </div>
+      </a>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-card">
+      <h3>Try the new matching engine</h3>
+      <p>Build your profile free and see your updated match scores today.</p>
+      <button class="cta-btn" onclick="window.location.href='/for-job-seekers'">Get Matched Free</button>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <a href="/" class="footer-logo">i<span>.</span>Exchange<span>.ai</span></a>
+  <div class="footer-links">
+    <a href="/for-job-seekers">For Job Seekers</a>
+    <a href="/for-employers">For Employers</a>
+    <a href="/blog">Blog</a>
+    <a href="#">Privacy</a>
+  </div>
+  <div class="footer-copy">© 2025 i.Exchange.ai</div>
+</footer>
+
+<script>
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+
+  document.querySelector('.share-btn:last-child').addEventListener('click', () => {
+    navigator.clipboard.writeText(window.location.href);
+    event.target.textContent = 'Copied!';
+    setTimeout(() => event.target.textContent = 'Copy Link', 2000);
+  });
+</script>
+</body>
+</html>

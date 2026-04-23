@@ -1,0 +1,357 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>i.Exchange.ai is now live in 9 countries | i.Exchange.ai Blog</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0A1628; --navy-mid: #0F2040; --blue-bright: #2B7FFF;
+    --cyan: #00C6FF; --white: #FFFFFF; --muted: #8BA8CC;
+    --text: #C8DDF5; --gold: #FFD166; --green: #06D6A0;
+    --card-bg: rgba(255,255,255,0.04); --card-border: rgba(100,180,255,0.12);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--navy); color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 16px; line-height: 1.6; overflow-x: hidden; }
+
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 18px 60px; background: rgba(10,22,40,0.88); backdrop-filter: blur(18px); border-bottom: 1px solid rgba(100,180,255,0.08); }
+  .nav-logo { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 800; color: var(--white); letter-spacing: -0.5px; text-decoration: none; }
+  .nav-logo span { color: var(--cyan); }
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--white); }
+  .nav-cta { background: linear-gradient(135deg, var(--blue-bright), var(--cyan)); color: var(--navy); border: none; padding: 10px 24px; border-radius: 8px; font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; cursor: pointer; }
+
+  .article-hero { padding: 140px 60px 60px; position: relative; overflow: hidden; border-bottom: 1px solid var(--card-border); }
+  .article-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 50% 70% at 50% 0%, rgba(30,95,204,0.15) 0%, transparent 65%); }
+  .article-hero-inner { position: relative; z-index: 2; max-width: 780px; margin: 0 auto; }
+  .breadcrumb { display: flex; align-items: center; gap: 8px; margin-bottom: 24px; font-size: 13px; color: var(--muted); }
+  .breadcrumb a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .breadcrumb a:hover { color: var(--cyan); }
+  .breadcrumb span { color: rgba(100,180,255,0.3); }
+  .article-tag { background: rgba(43,127,255,0.1); border: 1px solid rgba(43,127,255,0.2); color: var(--cyan); font-size: 11px; font-weight: 600; padding: 4px 14px; border-radius: 100px; display: inline-block; margin-bottom: 20px; letter-spacing: 1px; text-transform: uppercase; }
+  .article-title { font-family: 'Syne', sans-serif; font-size: clamp(28px, 4vw, 48px); font-weight: 800; color: var(--white); letter-spacing: -1.5px; line-height: 1.15; margin-bottom: 20px; }
+  .article-subtitle { font-size: 18px; color: var(--muted); font-weight: 300; line-height: 1.7; margin-bottom: 32px; max-width: 640px; }
+  .article-meta { display: flex; align-items: center; gap: 24px; padding-top: 24px; border-top: 1px solid rgba(100,180,255,0.08); flex-wrap: wrap; }
+  .author { display: flex; align-items: center; gap: 10px; }
+  .author-avatar { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, var(--blue-bright), var(--cyan)); display: flex; align-items: center; justify-content: center; font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; color: var(--navy); }
+  .author-name { font-size: 13px; font-weight: 600; color: var(--white); }
+  .author-role { font-size: 11px; color: var(--muted); }
+  .meta-divider { width: 1px; height: 28px; background: rgba(100,180,255,0.1); }
+  .meta-item { font-size: 13px; color: var(--muted); }
+
+  .article-layout { display: grid; grid-template-columns: 1fr 280px; gap: 60px; max-width: 1100px; margin: 0 auto; padding: 60px 60px 100px; }
+  .article-body { min-width: 0; }
+  .article-cover { width: 100%; aspect-ratio: 16/7; background: linear-gradient(135deg, rgba(43,127,255,0.12), rgba(0,198,255,0.06)); border: 1px solid var(--card-border); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 80px; margin-bottom: 48px; }
+
+  .article-content h2 { font-family: 'Syne', sans-serif; font-size: 26px; font-weight: 800; color: var(--white); letter-spacing: -0.5px; margin: 40px 0 16px; line-height: 1.2; }
+  .article-content h3 { font-family: 'Syne', sans-serif; font-size: 19px; font-weight: 700; color: var(--white); margin: 28px 0 12px; }
+  .article-content p { font-size: 16px; color: var(--text); line-height: 1.8; margin-bottom: 20px; }
+  .article-content ul, .article-content ol { padding-left: 24px; margin-bottom: 20px; }
+  .article-content li { font-size: 15px; color: var(--text); line-height: 1.75; margin-bottom: 8px; }
+  .article-content strong { color: var(--white); font-weight: 600; }
+  .article-content a { color: var(--cyan); text-decoration: none; border-bottom: 1px solid rgba(0,198,255,0.3); transition: border-color 0.2s; }
+  .article-content a:hover { border-color: var(--cyan); }
+  .callout { background: rgba(43,127,255,0.08); border: 1px solid rgba(43,127,255,0.2); border-left: 3px solid var(--blue-bright); border-radius: 0 12px 12px 0; padding: 20px 24px; margin: 28px 0; }
+  .callout p { margin: 0; color: var(--text); font-size: 15px; }
+  .stat-highlight { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 32px 0; }
+  .stat-box { background: var(--navy-mid); border: 1px solid var(--card-border); border-radius: 12px; padding: 24px 20px; text-align: center; }
+  .stat-box-num { font-family: 'Syne', sans-serif; font-size: 36px; font-weight: 800; color: var(--white); line-height: 1; }
+  .stat-box-num span { color: var(--cyan); }
+  .stat-box-label { font-size: 12px; color: var(--muted); margin-top: 6px; }
+  .country-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 32px 0; }
+  .country-card { background: var(--navy-mid); border: 1px solid var(--card-border); border-radius: 12px; padding: 20px; display: flex; align-items: center; gap: 12px; }
+  .country-flag { font-size: 28px; flex-shrink: 0; }
+  .country-name { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; color: var(--white); }
+  .country-status { font-size: 11px; color: var(--green); margin-top: 2px; }
+  .divider { height: 1px; background: rgba(100,180,255,0.08); margin: 40px 0; }
+
+  .article-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 48px; padding-top: 32px; border-top: 1px solid rgba(100,180,255,0.08); gap: 16px; flex-wrap: wrap; }
+  .article-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+  .article-tag-pill { background: rgba(255,255,255,0.04); border: 1px solid var(--card-border); color: var(--muted); font-size: 12px; padding: 5px 14px; border-radius: 100px; }
+  .share-label { font-size: 13px; color: var(--muted); margin-right: 8px; }
+  .share-btn { background: rgba(255,255,255,0.04); border: 1px solid var(--card-border); color: var(--text); font-size: 13px; font-weight: 500; padding: 8px 16px; border-radius: 8px; cursor: pointer; transition: border-color 0.2s; }
+  .share-btn:hover { border-color: var(--cyan); color: var(--white); }
+
+  .article-sidebar { position: sticky; top: 90px; height: fit-content; }
+  .sidebar-card { background: var(--navy-mid); border: 1px solid var(--card-border); border-radius: 16px; padding: 24px; margin-bottom: 20px; }
+  .sidebar-label { font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--cyan); font-weight: 600; margin-bottom: 16px; }
+  .toc-list { list-style: none; display: flex; flex-direction: column; gap: 2px; }
+  .toc-list a { font-size: 13px; color: var(--muted); text-decoration: none; padding: 6px 10px; border-radius: 8px; display: block; transition: background 0.2s, color 0.2s; border-left: 2px solid transparent; }
+  .toc-list a:hover { background: rgba(43,127,255,0.08); color: var(--white); border-left-color: var(--cyan); }
+  .related-post { display: flex; gap: 12px; align-items: flex-start; padding: 12px 0; border-bottom: 1px solid rgba(100,180,255,0.06); text-decoration: none; }
+  .related-post:last-child { border-bottom: none; padding-bottom: 0; }
+  .related-icon { width: 40px; height: 40px; border-radius: 8px; background: rgba(43,127,255,0.1); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+  .related-text h4 { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; color: var(--white); line-height: 1.3; margin-bottom: 4px; }
+  .related-text span { font-size: 11px; color: var(--muted); }
+  .cta-card { background: linear-gradient(135deg, rgba(43,127,255,0.15), rgba(0,198,255,0.08)); border: 1px solid rgba(43,127,255,0.2); border-radius: 16px; padding: 28px 24px; text-align: center; }
+  .cta-card h3 { font-family: 'Syne', sans-serif; font-size: 17px; font-weight: 800; color: var(--white); margin-bottom: 10px; }
+  .cta-card p { font-size: 13px; color: var(--muted); margin-bottom: 20px; line-height: 1.6; }
+  .cta-btn { width: 100%; background: linear-gradient(135deg, var(--blue-bright), var(--cyan)); color: var(--navy); border: none; padding: 12px; border-radius: 10px; font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; cursor: pointer; transition: opacity 0.2s; }
+  .cta-btn:hover { opacity: 0.9; }
+
+  footer { background: var(--navy-mid); border-top: 1px solid var(--card-border); padding: 40px 60px; display: flex; align-items: center; justify-content: space-between; }
+  .footer-logo { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 800; color: var(--white); text-decoration: none; }
+  .footer-logo span { color: var(--cyan); }
+  .footer-links { display: flex; gap: 28px; }
+  .footer-links a { font-size: 13px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--white); }
+  .footer-copy { font-size: 13px; color: var(--muted); }
+
+  .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 960px) {
+    nav { padding: 18px 24px; } .nav-links { display: none; }
+    .article-hero { padding: 120px 24px 48px; }
+    .article-layout { grid-template-columns: 1fr; padding: 40px 24px 80px; gap: 40px; }
+    .article-sidebar { position: static; }
+    .stat-highlight, .country-grid { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 20px; text-align: center; }
+    .footer-links { flex-wrap: wrap; justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">i<span>.</span>Exchange<span>.ai</span></a>
+  <ul class="nav-links">
+    <li><a href="/for-job-seekers">For Job Seekers</a></li>
+    <li><a href="/for-employers">For Employers</a></li>
+    <li><a href="/how-it-works">How It Works</a></li>
+    <li><a href="/blog" class="active">Blog</a></li>
+  </ul>
+  <button class="nav-cta">Get Started Free</button>
+</nav>
+
+<div class="article-hero">
+  <div class="article-hero-inner fade-up">
+    <div class="breadcrumb">
+      <a href="/">Home</a>
+      <span>/</span>
+      <a href="/blog">Blog</a>
+      <span>/</span>
+      <span style="color:var(--text)">9 Country Expansion</span>
+    </div>
+    <div class="article-tag">Announcement</div>
+    <h1 class="article-title">i.Exchange.ai is now live in 9 countries.</h1>
+    <p class="article-subtitle">We expanded our employer and job seeker network to Malaysia, Indonesia, and the Philippines — bringing our total active markets to 9 countries across Asia and Africa.</p>
+    <div class="article-meta">
+      <div class="author">
+        <div class="author-avatar">iX</div>
+        <div>
+          <div class="author-name">i.Exchange Team</div>
+          <div class="author-role">Growth</div>
+        </div>
+      </div>
+      <div class="meta-divider"></div>
+      <div class="meta-item">April 23, 2026</div>
+      <div class="meta-divider"></div>
+      <div class="meta-item">2 min read</div>
+    </div>
+  </div>
+</div>
+
+<div class="article-layout">
+
+  <div class="article-body fade-up">
+    <div class="article-cover">🌍</div>
+
+    <div class="article-content">
+
+      <p>When we launched i.Exchange.ai, we started with India. Today we're announcing that our platform is now live and fully operational across <strong>9 countries</strong> — with active employers posting roles and job seekers building profiles in every market.</p>
+
+      <p>Here's what this means, which markets we're in, and what we're building next.</p>
+
+      <h2 id="markets">The 9 markets</h2>
+
+      <p>Our network now spans South Asia, Southeast Asia, the Middle East, and Africa. Every market has active employer accounts and a growing pool of job seekers with verified skill profiles.</p>
+
+    </div>
+
+    <div class="country-grid">
+      <div class="country-card">
+        <div class="country-flag">🇮🇳</div>
+        <div>
+          <div class="country-name">India</div>
+          <div class="country-status">Live since launch</div>
+        </div>
+      </div>
+      <div class="country-card">
+        <div class="country-flag">🇦🇪</div>
+        <div>
+          <div class="country-name">UAE</div>
+          <div class="country-status">Live</div>
+        </div>
+      </div>
+      <div class="country-card">
+        <div class="country-flag">🇸🇬</div>
+        <div>
+          <div class="country-name">Singapore</div>
+          <div class="country-status">Live</div>
+        </div>
+      </div>
+      <div class="country-card">
+        <div class="country-flag">🇿🇦</div>
+        <div>
+          <div class="country-name">South Africa</div>
+          <div class="country-status">Live</div>
+        </div>
+      </div>
+      <div class="country-card">
+        <div class="country-flag">🇳🇬</div>
+        <div>
+          <div class="country-name">Nigeria</div>
+          <div class="country-status">Live</div>
+        </div>
+      </div>
+      <div class="country-card">
+        <div class="country-flag">🇰🇪</div>
+        <div>
+          <div class="country-name">Kenya</div>
+          <div class="country-status">Live</div>
+        </div>
+      </div>
+      <div class="country-card">
+        <div class="country-flag">🇮🇩</div>
+        <div>
+          <div class="country-name">Indonesia</div>
+          <div class="country-status">New</div>
+        </div>
+      </div>
+      <div class="country-card">
+        <div class="country-flag">🇵🇭</div>
+        <div>
+          <div class="country-name">Philippines</div>
+          <div class="country-status">New</div>
+        </div>
+      </div>
+      <div class="country-card">
+        <div class="country-flag">🇲🇾</div>
+        <div>
+          <div class="country-name">Malaysia</div>
+          <div class="country-status">New</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="article-content">
+
+      <h2 id="why">Why these markets</h2>
+
+      <p>All three new markets share a common challenge: large, skilled workforces that are underserved by existing job platforms. Keyword-based matching fails even harder in multilingual markets where candidates describe the same skills in different languages and formats.</p>
+
+      <p>Our skill code matching engine is language-agnostic at its core — it matches on standardized codes, not words. That makes it particularly well suited to markets where English is a second language but technical skills are world-class.</p>
+
+      <div class="callout">
+        <p>In our first 30 days in Southeast Asia, the average match score for shortlisted candidates was <strong>79%</strong> — higher than our global average of 76% at the same stage of market launch.</p>
+      </div>
+
+      <h2 id="stats">Where we are today</h2>
+
+    </div>
+
+    <div class="stat-highlight">
+      <div class="stat-box">
+        <div class="stat-box-num">9</div>
+        <div class="stat-box-label">Active countries</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-box-num">12<span>k+</span></div>
+        <div class="stat-box-label">Active users globally</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-box-num">500<span>+</span></div>
+        <div class="stat-box-label">Employers across all markets</div>
+      </div>
+    </div>
+
+    <div class="article-content">
+
+      <h2 id="next">What's next</h2>
+
+      <p>We're targeting <strong>15 countries by end of 2026</strong>. The next wave includes Saudi Arabia, Egypt, Bangladesh, and Sri Lanka — all markets with large, skilled talent pools and growing demand for AI-matched hiring.</p>
+
+      <p>If you're an employer in any of these markets and want early access, reach out to us directly through the platform.</p>
+
+      <div class="divider"></div>
+
+      <p>To every job seeker and employer who joined us in the new markets — welcome. We're building this for you.</p>
+
+    </div>
+
+    <div class="article-footer">
+      <div class="article-tags">
+        <span class="article-tag-pill">Announcement</span>
+        <span class="article-tag-pill">Expansion</span>
+        <span class="article-tag-pill">Southeast Asia</span>
+        <span class="article-tag-pill">Global</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span class="share-label">Share</span>
+        <button class="share-btn">LinkedIn</button>
+        <button class="share-btn" id="copy-btn">Copy Link</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="article-sidebar fade-up">
+    <div class="sidebar-card">
+      <div class="sidebar-label">In This Article</div>
+      <ul class="toc-list">
+        <li><a href="#markets">The 9 markets</a></li>
+        <li><a href="#why">Why these markets</a></li>
+        <li><a href="#stats">Where we are today</a></li>
+        <li><a href="#next">What's next</a></li>
+      </ul>
+    </div>
+
+    <div class="sidebar-card">
+      <div class="sidebar-label">Related Articles</div>
+      <a href="/blog/ai-matching" class="related-post">
+        <div class="related-icon">🧠</div>
+        <div class="related-text">
+          <h4>AI Skill Code Matching Launch</h4>
+          <span>April 20, 2026</span>
+        </div>
+      </a>
+    </div>
+
+    <div class="cta-card">
+      <h3>Join from your country</h3>
+      <p>Build your profile free and connect with employers across 9 markets.</p>
+      <button class="cta-btn" onclick="window.location.href='/for-job-seekers'">Get Started Free</button>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <a href="/" class="footer-logo">i<span>.</span>Exchange<span>.ai</span></a>
+  <div class="footer-links">
+    <a href="/for-job-seekers">For Job Seekers</a>
+    <a href="/for-employers">For Employers</a>
+    <a href="/blog">Blog</a>
+    <a href="#">Privacy</a>
+  </div>
+  <div class="footer-copy">© 2025 i.Exchange.ai</div>
+</footer>
+
+<script>
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+
+  document.getElementById('copy-btn').addEventListener('click', function() {
+    navigator.clipboard.writeText(window.location.href);
+    this.textContent = 'Copied!';
+    setTimeout(() => this.textContent = 'Copy Link', 2000);
+  });
+</script>
+</body>
+</html>
