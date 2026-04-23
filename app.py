@@ -1,6 +1,10 @@
 from flask import Flask
+from auto_register import main as auto_register
 from site_routes import site_bp
 from webhook import webhook_bp
+
+# Auto-detect and register any new pages before starting
+auto_register()
 
 app = Flask(__name__)
 

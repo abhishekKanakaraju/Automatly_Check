@@ -13,3 +13,8 @@ def job_seekers():
 @site_bp.route("/for-employers")
 def employers():
     return render_template("iexchange-employers.html")
+
+
+@site_bp.route("/how-it-works")
+def how_it_works():
+    return render_template("iexchange-how-it-works.html")
