@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pricing | i.Exchange.ai</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:        #0A1628;
+    --navy-mid:    #0F2040;
+    --blue-bright: #2B7FFF;
+    --cyan:        #00C6FF;
+    --white:       #FFFFFF;
+    --muted:       #8BA8CC;
+    --text:        #C8DDF5;
+    --gold:        #FFD166;
+    --green:       #06D6A0;
+    --card-bg:     rgba(255,255,255,0.04);
+    --card-border: rgba(100,180,255,0.12);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--navy); color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 16px; line-height: 1.6; overflow-x: hidden; }
+
+  /* NAV */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 18px 60px; background: rgba(10,22,40,0.88); backdrop-filter: blur(18px); border-bottom: 1px solid rgba(100,180,255,0.08); }
+  .nav-logo { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 800; color: var(--white); letter-spacing: -0.5px; text-decoration: none; }
+  .nav-logo span { color: var(--cyan); }
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--white); }
+  .nav-cta { background: linear-gradient(135deg, var(--blue-bright), var(--cyan)); color: var(--navy); border: none; padding: 10px 24px; border-radius: 8px; font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; cursor: pointer; transition: opacity 0.2s, transform 0.15s; }
+  .nav-cta:hover { opacity: 0.9; transform: translateY(-1px); }
+
+  /* HERO */
+  .hero { padding: 140px 60px 80px; text-align: center; position: relative; overflow: hidden; }
+  .hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 60% 70% at 50% 20%, rgba(30,95,204,0.2) 0%, transparent 65%), linear-gradient(180deg, #0A1628 0%, #0C1C36 100%); }
+  .hero-dots { position: absolute; inset: 0; opacity: 0.03; background-image: radial-gradient(rgba(100,180,255,1) 1px, transparent 1px); background-size: 28px 28px; }
+  .hero-content { position: relative; z-index: 2; max-width: 640px; margin: 0 auto; }
+  .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(0,198,255,0.1); border: 1px solid rgba(0,198,255,0.25); padding: 6px 16px; border-radius: 100px; font-size: 11px; font-weight: 600; color: var(--cyan); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 24px; }
+  .hero-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--cyan); animation: blink 2s infinite; }
+  @keyframes blink { 0%,100%{opacity:1;}50%{opacity:0.3;} }
+  h1 { font-family: 'Syne', sans-serif; font-size: clamp(32px, 4.5vw, 56px); font-weight: 800; color: var(--white); letter-spacing: -2px; line-height: 1.1; margin-bottom: 18px; }
+  h1 .grad { background: linear-gradient(135deg, var(--cyan), var(--blue-bright)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .hero-sub { font-size: 17px; color: var(--muted); font-weight: 300; line-height: 1.7; margin-bottom: 40px; }
+
+  /* TOGGLE */
+  .billing-toggle { display: inline-flex; align-items: center; gap: 12px; background: rgba(255,255,255,0.04); border: 1px solid var(--card-border); border-radius: 100px; padding: 6px 20px; margin-bottom: 64px; }
+  .toggle-label { font-size: 13px; color: var(--muted); font-weight: 500; cursor: pointer; transition: color 0.2s; }
+  .toggle-label.active { color: var(--white); font-weight: 600; }
+  .toggle-switch { width: 44px; height: 24px; background: rgba(43,127,255,0.3); border-radius: 100px; position: relative; cursor: pointer; transition: background 0.2s; }
+  .toggle-switch.annual { background: var(--blue-bright); }
+  .toggle-knob { width: 18px; height: 18px; background: var(--white); border-radius: 50%; position: absolute; top: 3px; left: 3px; transition: transform 0.2s; }
+  .toggle-switch.annual .toggle-knob { transform: translateX(20px); }
+  .save-badge { background: rgba(6,214,160,0.15); border: 1px solid rgba(6,214,160,0.3); color: var(--green); font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 100px; }
+
+  /* PRICING GRID */
+  .pricing-section { padding: 0 60px 100px; }
+  .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1100px; margin: 0 auto; }
+
+  .plan-card { border: 1px solid var(--card-border); border-radius: 24px; padding: 40px 36px; position: relative; background: rgba(255,255,255,0.02); transition: border-color 0.25s, transform 0.25s; }
+  .plan-card:hover { border-color: rgba(100,180,255,0.3); transform: translateY(-4px); }
+  .plan-card.featured { border-color: var(--blue-bright); background: rgba(30,95,204,0.08); }
+  .plan-card.featured::before { content: 'Most Popular'; position: absolute; top: -13px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, var(--blue-bright), var(--cyan)); color: var(--navy); font-size: 11px; font-weight: 700; padding: 4px 16px; border-radius: 100px; font-family: 'Syne', sans-serif; white-space: nowrap; }
+
+  .plan-audience { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--cyan); font-weight: 600; margin-bottom: 16px; }
+  .plan-name { font-family: 'Syne', sans-serif; font-size: 24px; font-weight: 800; color: var(--white); margin-bottom: 8px; }
+  .plan-desc { font-size: 13px; color: var(--muted); line-height: 1.6; margin-bottom: 28px; min-height: 40px; }
+  .plan-price { margin-bottom: 6px; }
+  .plan-amount { font-family: 'Syne', sans-serif; font-size: 52px; font-weight: 800; color: var(--white); line-height: 1; letter-spacing: -2px; }
+  .plan-amount sup { font-size: 24px; vertical-align: super; }
+  .plan-amount.free { font-size: 40px; }
+  .plan-period { font-size: 13px; color: var(--muted); margin-bottom: 32px; }
+  .plan-btn { width: 100%; padding: 14px; border-radius: 10px; font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.2s; margin-bottom: 32px; }
+  .plan-btn-outline { background: transparent; color: var(--white); border: 1px solid rgba(100,180,255,0.3); }
+  .plan-btn-outline:hover { border-color: var(--cyan); background: rgba(0,198,255,0.06); }
+  .plan-btn-filled { background: linear-gradient(135deg, var(--blue-bright), var(--cyan)); color: var(--navy); border: none; box-shadow: 0 4px 20px rgba(43,127,255,0.3); }
+  .plan-btn-filled:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(43,127,255,0.45); }
+
+  .plan-divider { height: 1px; background: rgba(100,180,255,0.08); margin-bottom: 24px; }
+  .plan-features-label { font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); font-weight: 600; margin-bottom: 16px; }
+  .plan-features { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .plan-features li { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: var(--text); line-height: 1.5; }
+  .plan-features li::before { content: '✓'; color: var(--green); font-weight: 700; font-size: 13px; flex-shrink: 0; margin-top: 1px; }
+  .plan-features li.no { color: var(--muted); }
+  .plan-features li.no::before { content: '—'; color: rgba(100,180,255,0.2); }
+
+  /* COMPARISON TABLE */
+  .compare-section { background: var(--navy-mid); border-top: 1px solid var(--card-border); padding: 100px 60px; }
+  .compare-header { text-align: center; margin-bottom: 56px; }
+  .compare-header h2 { font-family: 'Syne', sans-serif; font-size: clamp(26px, 3vw, 40px); font-weight: 800; color: var(--white); letter-spacing: -1.5px; margin-bottom: 12px; }
+  .compare-header p { font-size: 16px; color: var(--muted); }
+  .compare-table { max-width: 960px; margin: 0 auto; border: 1px solid var(--card-border); border-radius: 20px; overflow: hidden; }
+  .compare-thead { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; background: var(--navy-mid); border-bottom: 1px solid var(--card-border); }
+  .th { padding: 20px 24px; font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; color: var(--muted); }
+  .th.hl { color: var(--cyan); }
+  .compare-row { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; border-bottom: 1px solid rgba(100,180,255,0.05); transition: background 0.2s; }
+  .compare-row:last-child { border-bottom: none; }
+  .compare-row:hover { background: rgba(43,127,255,0.03); }
+  .compare-row.section-header { background: rgba(255,255,255,0.02); }
+  .td { padding: 16px 24px; font-size: 14px; color: var(--text); display: flex; align-items: center; }
+  .td.feature { color: var(--white); font-weight: 500; }
+  .td.section-title { font-family: 'Syne', sans-serif; font-size: 12px; font-weight: 700; color: var(--cyan); letter-spacing: 1px; text-transform: uppercase; }
+  .td.yes { color: var(--green); font-size: 16px; }
+  .td.no  { color: rgba(100,180,255,0.2); font-size: 16px; }
+  .td.val { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; color: var(--white); }
+
+  /* FAQ */
+  .faq-section { padding: 100px 60px; }
+  .faq-inner { max-width: 720px; margin: 0 auto; }
+  .faq-header { margin-bottom: 48px; }
+  .faq-header h2 { font-family: 'Syne', sans-serif; font-size: clamp(26px, 3vw, 40px); font-weight: 800; color: var(--white); letter-spacing: -1.5px; margin-bottom: 12px; }
+  .faq-header p { font-size: 16px; color: var(--muted); }
+  .faq-item { border-bottom: 1px solid rgba(100,180,255,0.08); }
+  .faq-q { width: 100%; background: none; border: none; text-align: left; padding: 22px 0; display: flex; align-items: center; justify-content: space-between; gap: 20px; cursor: pointer; }
+  .faq-q-text { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; color: var(--white); }
+  .faq-icon { width: 28px; height: 28px; border-radius: 50%; background: rgba(43,127,255,0.1); border: 1px solid rgba(43,127,255,0.2); display: flex; align-items: center; justify-content: center; color: var(--cyan); font-size: 18px; flex-shrink: 0; transition: transform 0.3s; }
+  .faq-item.open .faq-icon { transform: rotate(45deg); }
+  .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.35s ease, padding 0.3s; }
+  .faq-item.open .faq-a { max-height: 200px; padding-bottom: 20px; }
+  .faq-a p { font-size: 15px; color: var(--muted); line-height: 1.75; }
+
+  /* CTA */
+  .cta-section { text-align: center; padding: 100px 60px; position: relative; overflow: hidden; background: var(--navy-mid); border-top: 1px solid var(--card-border); }
+  .cta-section::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 70% 70% at 50% 50%, rgba(43,127,255,0.12) 0%, transparent 70%); }
+  .cta-inner { position: relative; z-index: 2; max-width: 520px; margin: 0 auto; }
+  .cta-section h2 { font-family: 'Syne', sans-serif; font-size: clamp(26px, 3vw, 40px); font-weight: 800; color: var(--white); letter-spacing: -1.5px; margin-bottom: 14px; }
+  .cta-section p { font-size: 16px; color: var(--muted); margin-bottom: 36px; line-height: 1.7; }
+  .cta-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+  .btn-primary { background: linear-gradient(135deg, var(--blue-bright), var(--cyan)); color: var(--navy); border: none; padding: 14px 32px; border-radius: 10px; font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 4px 24px rgba(43,127,255,0.35); }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(43,127,255,0.5); }
+  .btn-ghost { background: transparent; color: var(--white); border: 1px solid rgba(100,180,255,0.3); padding: 14px 32px; border-radius: 10px; font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 600; cursor: pointer; transition: border-color 0.2s, background 0.2s; }
+  .btn-ghost:hover { border-color: var(--cyan); background: rgba(0,198,255,0.06); }
+
+  /* FOOTER */
+  footer { background: var(--navy-mid); border-top: 1px solid var(--card-border); padding: 40px 60px; display: flex; align-items: center; justify-content: space-between; }
+  .footer-logo { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 800; color: var(--white); text-decoration: none; }
+  .footer-logo span { color: var(--cyan); }
+  .footer-links { display: flex; gap: 28px; }
+  .footer-links a { font-size: 13px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--white); }
+  .footer-copy { font-size: 13px; color: var(--muted); }
+
+  .fade-up { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 960px) {
+    nav { padding: 18px 24px; } .nav-links { display: none; }
+    .hero { padding: 120px 24px 60px; }
+    .pricing-section { padding: 0 24px 80px; }
+    .pricing-grid { grid-template-columns: 1fr; }
+    .compare-section, .faq-section, .cta-section { padding: 80px 24px; }
+    .compare-thead, .compare-row { grid-template-columns: 2fr 1fr 1fr 1fr; }
+    footer { flex-direction: column; gap: 20px; text-align: center; }
+    .footer-links { flex-wrap: wrap; justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">i<span>.</span>Exchange<span>.ai</span></a>
+    <ul class="nav-links">
+    <li><a href="/for-job-seekers">For Job Seekers</a></li>
+    <li><a href="/for-employers">For Employers</a></li>
+    <li><a href="/how-it-works">How It Works</a></li>
+    <li><a href="/pricing" class="active">Pricing</a></li>
+    <li><a href="/about">About</a></li>
+      <li><a href="/blog">Blog</a></li>
+  </ul>
+  <button class="nav-cta">Get Started Free</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero fade-up">
+  <div class="hero-bg"></div>
+  <div class="hero-dots"></div>
+  <div class="hero-content">
+    <div class="hero-badge">Pricing</div>
+    <h1>Simple pricing.<br><span class="grad">No surprises.</span></h1>
+    <p class="hero-sub">Free for job seekers, always. Employers pay only when they're ready to scale. No recruiter markups, no long-term contracts.</p>
+    <div class="billing-toggle">
+      <span class="toggle-label active" id="monthly-label">Monthly</span>
+      <div class="toggle-switch" id="billing-toggle" onclick="toggleBilling()">
+        <div class="toggle-knob"></div>
+      </div>
+      <span class="toggle-label" id="annual-label">Annual</span>
+      <span class="save-badge">Save 20%</span>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING CARDS -->
+<div class="pricing-section fade-up">
+  <div class="pricing-grid">
+
+    <!-- JOB SEEKER -->
+    <div class="plan-card">
+      <div class="plan-audience">For Job Seekers</div>
+      <div class="plan-name">Free</div>
+      <div class="plan-desc">Everything you need to find the right job. No credit card, no time limit.</div>
+      <div class="plan-price">
+        <div class="plan-amount free">Free</div>
+      </div>
+      <div class="plan-period">Forever. No catch.</div>
+      <button class="plan-btn plan-btn-outline" onclick="window.location.href='/for-job-seekers'">Build My Profile</button>
+      <div class="plan-divider"></div>
+      <div class="plan-features-label">What's included</div>
+      <ul class="plan-features">
+        <li>AI skill profile</li>
+        <li>Match score for every role</li>
+        <li>Employability score</li>
+        <li>Skill gap navigator</li>
+        <li>Smart job alerts</li>
+        <li>Direct employer messaging</li>
+        <li>Access across 9 countries</li>
+      </ul>
+    </div>
+
+    <!-- EMPLOYER GROWTH -->
+    <div class="plan-card featured">
+      <div class="plan-audience">For Employers</div>
+      <div class="plan-name">Growth</div>
+      <div class="plan-desc">For growing teams hiring consistently. AI shortlists, direct access, full pipeline.</div>
+      <div class="plan-price">
+        <div class="plan-amount" id="growth-price"><sup>$</sup>149</div>
+      </div>
+      <div class="plan-period" id="growth-period">per month · up to 5 users</div>
+      <button class="plan-btn plan-btn-filled">Start 14-Day Trial</button>
+      <div class="plan-divider"></div>
+      <div class="plan-features-label">What's included</div>
+      <ul class="plan-features">
+        <li>10 active job posts</li>
+        <li>AI match scoring with reasoning</li>
+        <li>Full employability signals</li>
+        <li>Unlimited candidate messaging</li>
+        <li>Pipeline tracker</li>
+        <li>Passive talent alerts</li>
+        <li class="no">Team collaboration</li>
+        <li class="no">ATS integrations</li>
+      </ul>
+    </div>
+
+    <!-- EMPLOYER SCALE -->
+    <div class="plan-card">
+      <div class="plan-audience">For Employers</div>
+      <div class="plan-name">Scale</div>
+      <div class="plan-desc">For high-volume hiring teams that need unlimited posts, integrations, and dedicated support.</div>
+      <div class="plan-price">
+        <div class="plan-amount free">Custom</div>
+      </div>
+      <div class="plan-period">Talk to us for a quote</div>
+      <button class="plan-btn plan-btn-outline">Talk to Sales</button>
+      <div class="plan-divider"></div>
+      <div class="plan-features-label">Everything in Growth, plus</div>
+      <ul class="plan-features">
+        <li>Unlimited job posts</li>
+        <li>Team collaboration</li>
+        <li>ATS integrations</li>
+        <li>Custom reporting</li>
+        <li>Dedicated account manager</li>
+        <li>Priority support SLA</li>
+        <li>Government & enterprise options</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<!-- COMPARISON TABLE -->
+<section class="compare-section fade-up">
+  <div class="compare-header">
+    <h2>Full feature comparison</h2>
+    <p>See exactly what's included in each plan.</p>
+  </div>
+  <div class="compare-table">
+    <div class="compare-thead">
+      <div class="th">Feature</div>
+      <div class="th">Free</div>
+      <div class="th hl">Growth</div>
+      <div class="th">Scale</div>
+    </div>
+
+    <!-- Job Seeker Features -->
+    <div class="compare-row section-header">
+      <div class="td section-title">Job Seeker Features</div>
+      <div class="td"></div><div class="td"></div><div class="td"></div>
+    </div>
+    <div class="compare-row">
+      <div class="td feature">AI skill profile</div>
+      <div class="td yes">✓</div><div class="td yes">✓</div><div class="td yes">✓</div>
+    </div>
+    <div class="compare-row">
+      <div class="td feature">Match score per role</div>
+      <div class="td yes">✓</div><div class="td yes">✓</div><div class="td yes">✓</div>
+    </div>
+    <div class="compare-row">
+      <div class="td feature">Employability score</div>
+      <div class="td yes">✓</div><div class="td yes">✓</div><div class="td yes">✓</div>
+    </div>
+    <div class="compare-row">
+      <div class="td feature">Skill gap navigator</div>
+      <div class="td yes">✓</div><div class="td yes">✓</div><div class="td yes">✓</div>
+    </div>
+
+    <!-- Employer Features -->
+    <div class="compare-row section-header">
+      <div class="td section-title">Employer Features</div>
+      <div class="td"></div><div class="td"></div><div class="td"></div>
+    </div>
+    <div class="compare-row">
+      <div class="td feature">Active job posts</div>
+      <div class="td no">—</div>
+      <div class="td val">10</div>
+      <div class="td val">Unlimited</div>
+    </div>
+    <div class="compare-row">
+      <div class="td feature">AI match scoring with reasoning</div>
+      <div class="td no">—</div><div class="td yes">✓</div><div class="td yes">✓</div>
+    </div>
+    <div class="compare-row">
+      <div class="td feature">Pipeline tracker</div>
+      <div class="td no">—</div><div class="td yes">✓</div><div class="td yes">✓</div>
+    </div>
+    <div class="compare-row">
+      <div class="td feature">Passive talent alerts</div>
+      <div class="td no">—</div><div class="td yes">✓</div><div class="td yes">✓</div>
+    </div>
+    <div class="compare-row">
+      <div class="td feature">Team collaboration</div>
+      <div class="td no">—</div><div class="td no">—</div><div class="td yes">✓</div>
+    </div>
+    <div class="compare-row">
+      <div class="td feature">ATS integrations</div>
+      <div class="td no">—</div><div class="td no">—</div><div class="td yes">✓</div>
+    </div>
+    <div class="compare-row">
+      <div class="td feature">Dedicated account manager</div>
+      <div class="td no">—</div><div class="td no">—</div><div class="td yes">✓</div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section fade-up">
+  <div class="faq-inner">
+    <div class="faq-header">
+      <h2>Frequently asked questions</h2>
+      <p>Everything you need to know about our pricing.</p>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-q-text">Is i.Exchange.ai really free for job seekers?</span>
+        <div class="faq-icon">+</div>
+      </button>
+      <div class="faq-a"><p>Yes, completely free. Job seekers get full access to skill profiles, match scores, skill gap navigator, job alerts, and direct employer messaging at no cost — forever. No hidden tier, no trial expiry.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-q-text">Can I try the Growth plan before paying?</span>
+        <div class="faq-icon">+</div>
+      </button>
+      <div class="faq-a"><p>Yes. Every new employer account gets a 14-day free trial of the Growth plan with no credit card required. You only enter payment details if you decide to continue after the trial.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-q-text">What's the difference between monthly and annual billing?</span>
+        <div class="faq-icon">+</div>
+      </button>
+      <div class="faq-a"><p>Annual billing gives you a 20% discount — you pay for 10 months and get 12. Monthly billing is flexible with no commitment. You can switch between the two at any time.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-q-text">Can I cancel anytime?</span>
+        <div class="faq-icon">+</div>
+      </button>
+      <div class="faq-a"><p>Yes. Monthly plans can be cancelled anytime with no penalty. Annual plans can be cancelled but are non-refundable for the remaining period. No long-term contracts on any plan.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-q-text">What counts as an active job post?</span>
+        <div class="faq-icon">+</div>
+      </button>
+      <div class="faq-a"><p>An active job post is any open role currently visible to job seekers and accepting applications. You can archive and repost roles without using additional post slots. Closed roles don't count against your limit.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-q-text">Do you offer discounts for startups or NGOs?</span>
+        <div class="faq-icon">+</div>
+      </button>
+      <div class="faq-a"><p>Yes. We offer special pricing for early-stage startups, non-profits, and government employment programs. Reach out to us through the contact page and we'll work something out.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section fade-up">
+  <div class="cta-inner">
+    <h2>Start free. Scale when ready.</h2>
+    <p>No credit card needed to get started. Join 12,000+ people and teams already on i.Exchange.ai.</p>
+    <div class="cta-btns">
+      <button class="btn-primary" onclick="window.location.href='/for-job-seekers'">Get Matched Free</button>
+      <button class="btn-ghost" onclick="window.location.href='/for-employers'">Start Employer Trial</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a href="/" class="footer-logo">i<span>.</span>Exchange<span>.ai</span></a>
+  <div class="footer-links">
+    <a href="/for-job-seekers">For Job Seekers</a>
+    <a href="/for-employers">For Employers</a>
+    <a href="/pricing">Pricing</a>
+    <a href="/blog">Blog</a>
+  </div>
+  <div class="footer-copy">© 2025 i.Exchange.ai</div>
+</footer>
+
+<script>
+  // Force scroll to top on every page load
+  if (history.scrollRestoration) {
+    history.scrollRestoration = 'manual';
+  }
+  window.scrollTo(0, 0);
+
+  // Scroll animations
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+
+  // FAQ accordion
+  function toggleFaq(btn) {
+    const item = btn.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+
+  // Billing toggle
+  let isAnnual = false;
+  function toggleBilling() {
+    isAnnual = !isAnnual;
+    const toggle = document.getElementById('billing-toggle');
+    const monthlyLabel = document.getElementById('monthly-label');
+    const annualLabel = document.getElementById('annual-label');
+    const growthPrice = document.getElementById('growth-price');
+    const growthPeriod = document.getElementById('growth-period');
+
+    if (isAnnual) {
+      toggle.classList.add('annual');
+      monthlyLabel.classList.remove('active');
+      annualLabel.classList.add('active');
+      growthPrice.innerHTML = '<sup>$</sup>119';
+      growthPeriod.textContent = 'per month · billed annually';
+    } else {
+      toggle.classList.remove('annual');
+      monthlyLabel.classList.add('active');
+      annualLabel.classList.remove('active');
+      growthPrice.innerHTML = '<sup>$</sup>149';
+      growthPeriod.textContent = 'per month · up to 5 users';
+    }
+  }
+</script>
+</body>
+</html>

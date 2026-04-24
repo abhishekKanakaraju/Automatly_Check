@@ -225,13 +225,13 @@
 <!-- NAV -->
 <nav>
   <a href="/" class="nav-logo">i<span>.</span>Exchange<span>.ai</span></a>
-  <ul class="nav-links">
+    <ul class="nav-links">
     <li><a href="/for-job-seekers">For Job Seekers</a></li>
     <li><a href="/for-employers">For Employers</a></li>
     <li><a href="/how-it-works" class="active">How It Works</a></li>
-    <li><a href="/#testimonials">Stories</a></li>
+    <li><a href="/pricing">Pricing</a></li>
+    <li><a href="/about">About</a></li>
       <li><a href="/blog">Blog</a></li>
-      <li><a href="/about">About</a></li>
   </ul>
   <button class="nav-cta">Get Started Free</button>
 </nav>
@@ -572,12 +572,18 @@
     <a href="/for-job-seekers">For Job Seekers</a>
     <a href="/for-employers">For Employers</a>
     <a href="/how-it-works">How It Works</a>
-    <a href="#">Privacy</a>
+    <a href="/">Privacy</a>
   </div>
   <div class="footer-copy">© 2025 i.Exchange.ai</div>
 </footer>
 
 <script>
+  // Force scroll to top on every page load
+  if (history.scrollRestoration) {
+    history.scrollRestoration = 'manual';
+  }
+  window.scrollTo(0, 0);
+
   // Scroll animations
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });

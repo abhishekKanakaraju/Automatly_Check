@@ -72,12 +72,12 @@
 
 <nav>
   <a href="/" class="nav-logo">i<span>.</span>Exchange<span>.ai</span></a>
-  <ul class="nav-links">
+    <ul class="nav-links">
     <li><a href="/for-job-seekers">For Job Seekers</a></li>
     <li><a href="/for-employers">For Employers</a></li>
     <li><a href="/how-it-works">How It Works</a></li>
-    <li><a href="/blog" class="active">Blog</a></li>
-      <li><a href="/about">About</a></li>
+    <li><a href="/pricing">Pricing</a></li>
+    <li><a href="/about">About</a></li>
   </ul>
   <button class="nav-cta">Get Started Free</button>
 </nav>
@@ -129,6 +129,12 @@
 </footer>
 
 <script>
+  // Force scroll to top on every page load
+  if (history.scrollRestoration) {
+    history.scrollRestoration = 'manual';
+  }
+  window.scrollTo(0, 0);
+
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
   }, { threshold: 0.08 });

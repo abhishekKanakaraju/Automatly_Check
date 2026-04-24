@@ -1,11 +1,13 @@
 from flask import Flask
-from auto_register import main as auto_register
+from register_pages import main as register_pages
+from register_blogs import main as register_blogs
 from site_routes import site_bp
 from webhook import webhook_bp
 import os
 
-# Auto-detect and register any new pages and blog articles before starting
-auto_register()
+# Auto-register pages and blogs before starting
+register_pages()
+register_blogs()
 
 app = Flask(__name__, template_folder="templates")
 

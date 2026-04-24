@@ -498,14 +498,13 @@
 <!-- NAV -->
 <nav>
   <div class="nav-logo"><a href="/" style="text-decoration:none;color:inherit;">i<span>.</span>Exchange<span>.ai</span></a></div>
-  <ul class="nav-links">
+    <ul class="nav-links">
     <li><a href="/for-job-seekers">For Job Seekers</a></li>
     <li><a href="/for-employers" class="active">For Employers</a></li>
-    <li><a href="/#how">How It Works</a></li>
-    <li><a href="/#testimonials">Stories</a></li>
-      <li><a href="/how-it-works">How It Works</a></li>
+    <li><a href="/how-it-works">How It Works</a></li>
+    <li><a href="/pricing">Pricing</a></li>
+    <li><a href="/about">About</a></li>
       <li><a href="/blog">Blog</a></li>
-      <li><a href="/about">About</a></li>
   </ul>
   <button class="nav-cta">Post a Role Free</button>
 </nav>
@@ -761,6 +760,12 @@
 </footer>
 
 <script>
+  // Force scroll to top on every page load
+  if (history.scrollRestoration) {
+    history.scrollRestoration = 'manual';
+  }
+  window.scrollTo(0, 0);
+
   // Scroll-based fade-up
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {

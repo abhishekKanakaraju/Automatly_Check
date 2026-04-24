@@ -336,12 +336,18 @@
     <a href="/for-job-seekers">For Job Seekers</a>
     <a href="/for-employers">For Employers</a>
     <a href="/blog">Blog</a>
-    <a href="#">Privacy</a>
+    <a href="/">Privacy</a>
   </div>
   <div class="footer-copy">© 2025 i.Exchange.ai</div>
 </footer>
 
 <script>
+  // Force scroll to top on every page load
+  if (history.scrollRestoration) {
+    history.scrollRestoration = 'manual';
+  }
+  window.scrollTo(0, 0);
+
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
   }, { threshold: 0.08 });
