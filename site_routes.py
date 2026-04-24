@@ -12,6 +12,8 @@ def get_articles():
     with open(blogs_file, "r", encoding="utf-8") as f:
         return json.load(f)
 
+
+
 @site_bp.route("/")
 def index():
     return render_template("index.html")
@@ -29,20 +31,9 @@ def how_it_works():
     return render_template("iexchange-how-it-works.html")
 
 @site_bp.route("/blog")
-def blog():
+def blog_2():
     articles = get_articles()
     return render_template("iexchange-blog.html", articles=articles)
-
-@site_bp.route("/blog/ai-matching")
-def blog_ai_matching():
-    return render_template("blog-ai-matching.html")
-
-@site_bp.route("/blog/9-country-expansion")
-def blog_9_country_expansion():
-    return render_template("blog-9-country-expansion.html")
-@site_bp.route("/blog")
-def blog_2():
-    return render_template("iexchange-blog.html")
 
 @site_bp.route("/blog/ai-matching")
 def blog_ai_matching_2():
@@ -51,3 +42,16 @@ def blog_ai_matching_2():
 @site_bp.route("/blog/9-country-expansion")
 def blog_page_9_country_expansion():
     return render_template("../blogs/blog-9-country-expansion.html")
+
+@site_bp.route("/about")
+def about():
+    return render_template("iexchange-about.html")
+
+@site_bp.route("/blog/skill-gap-navigator")
+def blog_skill_gap_navigator():
+    return render_template("../blogs/blog-skill-gap-navigator.html")
+
+@site_bp.route("/blog")
+def blog():
+    articles = get_articles()
+    return render_template("iexchange-blog.html", articles=articles)

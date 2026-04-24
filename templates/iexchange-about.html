@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About | i.Exchange.ai</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0A1628; --navy-mid: #0F2040; --blue-bright: #2B7FFF;
+    --cyan: #00C6FF; --white: #FFFFFF; --muted: #8BA8CC;
+    --text: #C8DDF5; --green: #06D6A0;
+    --card-bg: rgba(255,255,255,0.04); --card-border: rgba(100,180,255,0.12);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--navy); color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 16px; line-height: 1.6; }
+
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 18px 60px; background: rgba(10,22,40,0.88); backdrop-filter: blur(18px); border-bottom: 1px solid rgba(100,180,255,0.08); }
+  .nav-logo { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 800; color: var(--white); text-decoration: none; }
+  .nav-logo span { color: var(--cyan); }
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--white); }
+  .nav-cta { background: linear-gradient(135deg, var(--blue-bright), var(--cyan)); color: var(--navy); border: none; padding: 10px 24px; border-radius: 8px; font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; cursor: pointer; }
+
+  .page { max-width: 800px; margin: 0 auto; padding: 140px 60px 100px; }
+  .label { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--cyan); font-weight: 600; margin-bottom: 14px; }
+  h1 { font-family: 'Syne', sans-serif; font-size: clamp(32px, 4vw, 52px); font-weight: 800; color: var(--white); letter-spacing: -2px; line-height: 1.15; margin-bottom: 20px; }
+  h1 span { background: linear-gradient(135deg, var(--cyan), var(--blue-bright)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .intro { font-size: 18px; color: var(--muted); font-weight: 300; line-height: 1.75; margin-bottom: 60px; border-bottom: 1px solid var(--card-border); padding-bottom: 48px; }
+
+  h2 { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 800; color: var(--white); margin: 48px 0 16px; }
+  p { font-size: 16px; color: var(--text); line-height: 1.8; margin-bottom: 20px; }
+  .highlight { background: rgba(43,127,255,0.08); border-left: 3px solid var(--blue-bright); border-radius: 0 10px 10px 0; padding: 18px 24px; margin: 28px 0; }
+  .highlight p { margin: 0; color: var(--text); }
+
+  .values { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 32px 0; }
+  .value-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 24px; }
+  .value-icon { font-size: 24px; margin-bottom: 10px; }
+  .value-card h3 { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; color: var(--white); margin-bottom: 6px; }
+  .value-card p { font-size: 13px; color: var(--muted); margin: 0; line-height: 1.6; }
+
+  .cta-strip { background: linear-gradient(135deg, rgba(43,127,255,0.1), rgba(0,198,255,0.06)); border: 1px solid rgba(43,127,255,0.2); border-radius: 16px; padding: 36px; text-align: center; margin-top: 60px; }
+  .cta-strip h3 { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 800; color: var(--white); margin-bottom: 10px; }
+  .cta-strip p { font-size: 15px; color: var(--muted); margin-bottom: 24px; }
+  .cta-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .btn-primary { background: linear-gradient(135deg, var(--blue-bright), var(--cyan)); color: var(--navy); border: none; padding: 13px 28px; border-radius: 10px; font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; cursor: pointer; }
+  .btn-ghost { background: transparent; color: var(--white); border: 1px solid rgba(100,180,255,0.3); padding: 13px 28px; border-radius: 10px; font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 600; cursor: pointer; }
+
+  footer { background: var(--navy-mid); border-top: 1px solid var(--card-border); padding: 40px 60px; display: flex; align-items: center; justify-content: space-between; }
+  .footer-logo { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 800; color: var(--white); text-decoration: none; }
+  .footer-logo span { color: var(--cyan); }
+  .footer-copy { font-size: 13px; color: var(--muted); }
+
+  @media (max-width: 768px) {
+    nav { padding: 18px 24px; } .nav-links { display: none; }
+    .page { padding: 120px 24px 80px; }
+    .values { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 16px; text-align: center; padding: 32px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">i<span>.</span>Exchange<span>.ai</span></a>
+  <ul class="nav-links">
+    <li><a href="/for-job-seekers">For Job Seekers</a></li>
+    <li><a href="/for-employers">For Employers</a></li>
+    <li><a href="/how-it-works">How It Works</a></li>
+    <li><a href="/about" class="active">About</a></li>
+      <li><a href="/blog">Blog</a></li>
+  </ul>
+  <button class="nav-cta">Get Started Free</button>
+</nav>
+
+<div class="page">
+  <div class="label">About Us</div>
+  <h1>We're fixing how<br>hiring <span>actually works.</span></h1>
+  <p class="intro">i.Exchange.ai is built by Spire.AI — a team that has spent years building workforce intelligence tools for enterprises. We took that same AI and built it for individuals and growing companies who deserve the same quality of matching.</p>
+
+  <h2>Why we exist</h2>
+  <p>The job market is broken in a specific, fixable way. Employers can't find the right people even when they're there. Job seekers can't get noticed even when they're qualified. The problem isn't supply or demand — it's that the matching layer between them is built on keyword filters from the 1990s.</p>
+  <p>We built i.Exchange.ai to replace that matching layer with something that actually works — AI that understands skills, not just words.</p>
+
+  <div class="highlight">
+    <p>Our matching engine maps every skill to a standardized code, then scores fit based on what people can actually do — not how they described it on a resume.</p>
+  </div>
+
+  <h2>What we believe</h2>
+  <div class="values">
+    <div class="value-card">
+      <div class="value-icon">🎯</div>
+      <h3>Skills over credentials</h3>
+      <p>What you can do matters more than where you studied. Our platform is built around demonstrated capability, not paper qualifications.</p>
+    </div>
+    <div class="value-card">
+      <div class="value-icon">🔍</div>
+      <h3>Transparency by default</h3>
+      <p>Every match score comes with an explanation. No black boxes. You always know why you matched and what to improve.</p>
+    </div>
+    <div class="value-card">
+      <div class="value-icon">🌍</div>
+      <h3>Built for emerging markets</h3>
+      <p>Most hiring platforms are built for the US and Europe. We started in India and are expanding across Asia and Africa first.</p>
+    </div>
+    <div class="value-card">
+      <div class="value-icon">⚡</div>
+      <h3>Speed matters</h3>
+      <p>Every day a role goes unfilled costs money. Every day a job seeker doesn't hear back costs confidence. We optimize for both.</p>
+    </div>
+  </div>
+
+  <h2>Built by Spire.AI</h2>
+  <p>i.Exchange.ai is a product of Spire.AI, a workforce intelligence company working with enterprises across 9 countries. Spire.AI's other products — Knowra and evoSapien — power workforce planning and skill architecture for large organizations.</p>
+  <p>i.Exchange.ai brings the same AI to individuals and growing teams who need better hiring without enterprise budgets.</p>
+
+  <div class="cta-strip">
+    <h3>Ready to see it in action?</h3>
+    <p>Build your skill profile free or post your first role at no cost.</p>
+    <div class="cta-btns">
+      <button class="btn-primary" onclick="window.location.href='/for-job-seekers'">Get Matched Free</button>
+      <button class="btn-ghost" onclick="window.location.href='/for-employers'">Post a Role</button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <a href="/" class="footer-logo">i<span>.</span>Exchange<span>.ai</span></a>
+  <div class="footer-copy">© 2025 i.Exchange.ai. A Spire.AI product.</div>
+</footer>
+
+</body>
+</html>
