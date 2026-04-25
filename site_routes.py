@@ -5,7 +5,6 @@ import os
 site_bp = Blueprint("site", __name__)
 
 def get_articles():
-    """Read blogs.json and return list of articles."""
     blogs_file = os.path.join(os.path.dirname(__file__), "blogs.json")
     if not os.path.exists(blogs_file):
         return []
@@ -52,22 +51,3 @@ def blog_9_country_expansion():
 @site_bp.route("/blog/skill-gap-navigator")
 def blog_skill_gap_navigator():
     return render_template("blog-skill-gap-navigator.html")
-@site_bp.route("/blog")
-def blog_2():
-    articles = get_articles()
-    return render_template("iexchange-blog.html", articles=articles)
-
-@site_bp.route("/blog")
-def blog_3():
-    articles = get_articles()
-    return render_template("iexchange-blog.html", articles=articles)
-
-@site_bp.route("/blog")
-def blog_4():
-    articles = get_articles()
-    return render_template("iexchange-blog.html", articles=articles)
-
-@site_bp.route("/blog")
-def blog_5():
-    articles = get_articles()
-    return render_template("iexchange-blog.html", articles=articles)

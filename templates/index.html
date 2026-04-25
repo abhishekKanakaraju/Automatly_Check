@@ -39,7 +39,7 @@
   .nav-logo span { color: var(--cyan); }
   .nav-links { display: flex; gap: 36px; list-style: none; }
   .nav-links a { color: var(--muted); text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.2s; }
-  .nav-links a:hover, .nav-links a.active { color: var(--white); }
+  .nav-links a:hover, .nav-links a.active { color: var(--white); border-bottom: 2px solid var(--cyan); padding-bottom: 2px; }
   .nav-cta { background: linear-gradient(135deg, var(--blue-bright), var(--cyan)); color: var(--navy); border: none; padding: 10px 24px; border-radius: 8px; font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; cursor: pointer; transition: opacity 0.2s, transform 0.15s; }
   .nav-cta:hover { opacity: 0.9; transform: translateY(-1px); }
 
@@ -207,7 +207,7 @@
 <!-- NAV -->
 <nav>
   <a href="/" class="nav-logo">i<span>.</span>Exchange<span>.ai</span></a>
-    <ul class="nav-links">
+              <ul class="nav-links">
     <li><a href="/for-job-seekers">For Job Seekers</a></li>
     <li><a href="/for-employers">For Employers</a></li>
     <li><a href="/how-it-works">How It Works</a></li>
@@ -498,6 +498,12 @@
   }
   window.scrollTo(0, 0);
 
+  // Show elements already in viewport immediately
+  document.querySelectorAll('.fade-up').forEach(el => {
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight) el.classList.add('visible');
+  });
+
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
   }, { threshold: 0.08 });
@@ -505,3 +511,4 @@
 </script>
 </body>
 </html>
+

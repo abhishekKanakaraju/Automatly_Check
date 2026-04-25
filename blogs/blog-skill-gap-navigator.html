@@ -21,7 +21,7 @@
   .nav-logo span { color: var(--cyan); }
   .nav-links { display: flex; gap: 36px; list-style: none; }
   .nav-links a { color: var(--muted); text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.2s; }
-  .nav-links a:hover, .nav-links a.active { color: var(--white); }
+  .nav-links a:hover, .nav-links a.active { color: var(--white); border-bottom: 2px solid var(--cyan); padding-bottom: 2px; }
   .nav-cta { background: linear-gradient(135deg, var(--blue-bright), var(--cyan)); color: var(--navy); border: none; padding: 10px 24px; border-radius: 8px; font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; cursor: pointer; }
 
   .article-hero { padding: 140px 60px 60px; position: relative; overflow: hidden; border-bottom: 1px solid var(--card-border); }
@@ -124,11 +124,13 @@
 
 <nav>
   <a href="/" class="nav-logo">i<span>.</span>Exchange<span>.ai</span></a>
-  <ul class="nav-links">
+            <ul class="nav-links">
     <li><a href="/for-job-seekers">For Job Seekers</a></li>
     <li><a href="/for-employers">For Employers</a></li>
     <li><a href="/how-it-works">How It Works</a></li>
+    <li><a href="/pricing">Pricing</a></li>
     <li><a href="/blog" class="active">Blog</a></li>
+    <li><a href="/about">About</a></li>
   </ul>
   <button class="nav-cta">Get Started Free</button>
 </nav>
@@ -138,7 +140,7 @@
     <div class="breadcrumb">
       <a href="/">Home</a>
       <span>/</span>
-      <a href="/blog">Blog</a>
+      <a href="/blog" class="active">Blog</a>
       <span>/</span>
       <span style="color:var(--text)">Skill Gap Navigator</span>
     </div>
@@ -294,7 +296,7 @@
       <div class="sidebar-label">In This Article</div>
       <ul class="toc-list">
         <li><a href="#problem">The problem with generic advice</a></li>
-        <li><a href="/#how">How it works</a></li>
+        <li><a href="#how">How it works</a></li>
         <li><a href="#example">A real example</a></li>
         <li><a href="#results">Early results</a></li>
         <li><a href="#access">How to access it</a></li>
@@ -333,8 +335,8 @@
   <div class="footer-links">
     <a href="/for-job-seekers">For Job Seekers</a>
     <a href="/for-employers">For Employers</a>
-    <a href="/blog">Blog</a>
-    <a href="/">Privacy</a>
+    <a href="/blog" class="active">Blog</a>
+    <a href="#">Privacy</a>
   </div>
   <div class="footer-copy">© 2025 i.Exchange.ai</div>
 </footer>
@@ -345,6 +347,12 @@
     history.scrollRestoration = 'manual';
   }
   window.scrollTo(0, 0);
+
+  // Show elements already in viewport immediately
+  document.querySelectorAll('.fade-up').forEach(el => {
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight) el.classList.add('visible');
+  });
 
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
@@ -359,3 +367,4 @@
 </script>
 </body>
 </html>
+
