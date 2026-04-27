@@ -51,3 +51,10 @@ def blog_9_country_expansion():
 @site_bp.route("/blog/skill-gap-navigator")
 def blog_skill_gap_navigator():
     return render_template("blog-skill-gap-navigator.html")
+@site_bp.route("/contact")
+def contact():
+    return render_template("iexchange-contact.html")
+
+@site_bp.route("/blog/direct-messaging")
+def blog_direct_messaging():
+    return render_template("blog-direct-messaging.html")
